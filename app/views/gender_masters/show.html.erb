@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @gender_master.gender %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @gender_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @gender_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @gender_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_gender_master_path(@gender_master) %> |
+<%= link_to 'Back', gender_masters_path %>

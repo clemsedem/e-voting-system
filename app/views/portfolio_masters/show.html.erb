@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Ref:</strong>
+  <%= @portfolio_master.ref_id %>
+</p>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @portfolio_master.portfolio %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @portfolio_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @portfolio_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @portfolio_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_portfolio_master_path(@portfolio_master) %> |
+<%= link_to 'Back', portfolio_masters_path %>

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Voter:</strong>
+  <%= @registered_voter.voter_id %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @registered_voter.surname %>
+</p>
+
+<p>
+  <strong>Other names:</strong>
+  <%= @registered_voter.other_names %>
+</p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @registered_voter.level_id %>
+</p>
+
+<p>
+  <strong>Session:</strong>
+  <%= @registered_voter.session_id %>
+</p>
+
+<p>
+  <strong>Program:</strong>
+  <%= @registered_voter.program_id %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @registered_voter.gender_id %>
+</p>
+
+<p>
+  <strong>Vote status:</strong>
+  <%= @registered_voter.vote_status %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @registered_voter.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @registered_voter.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @registered_voter.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_registered_voter_path(@registered_voter) %> |
+<%= link_to 'Back', registered_voters_path %>

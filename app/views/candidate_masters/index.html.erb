@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Candidate Masters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Voter</th>
+      <th>Portfolio</th>
+      <th>User</th>
+      <th>Active status</th>
+      <th>Del status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @candidate_masters.each do |candidate_master| %>
+      <tr>
+        <td><%= candidate_master.voter_id %></td>
+        <td><%= candidate_master.portfolio_id %></td>
+        <td><%= candidate_master.user_id %></td>
+        <td><%= candidate_master.active_status %></td>
+        <td><%= candidate_master.del_status %></td>
+        <td><%= link_to 'Show', candidate_master %></td>
+        <td><%= link_to 'Edit', edit_candidate_master_path(candidate_master) %></td>
+        <td><%= link_to 'Destroy', candidate_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Candidate master', new_candidate_master_path %>

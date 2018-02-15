@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Voter:</strong>
+  <%= @voter_token.voter_id %>
+</p>
+
+<p>
+  <strong>Token:</strong>
+  <%= @voter_token.token %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @voter_token.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @voter_token.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @voter_token.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_voter_token_path(@voter_token) %> |
+<%= link_to 'Back', voter_tokens_path %>

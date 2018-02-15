@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  voter_id: MyString
+  surname: MyString
+  other_names: MyString
+  level_id: 1
+  session_id: 1
+  program_id: 1
+  gender_id: 
+  vote_status: false
+  user_id: 1
+  active_status: false
+  del_status: false
+
+two:
+  voter_id: MyString
+  surname: MyString
+  other_names: MyString
+  level_id: 1
+  session_id: 1
+  program_id: 1
+  gender_id: 
+  vote_status: false
+  user_id: 1
+  active_status: false
+  del_status: false

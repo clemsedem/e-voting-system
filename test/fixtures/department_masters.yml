@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  department_name: MyString
+  faculty_id: 1
+  user_id: 1
+  active_status: false
+  del_status: false
+
+two:
+  department_name: MyString
+  faculty_id: 1
+  user_id: 1
+  active_status: false
+  del_status: false

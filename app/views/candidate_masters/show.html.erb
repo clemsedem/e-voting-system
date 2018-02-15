@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Voter:</strong>
+  <%= @candidate_master.voter_id %>
+</p>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @candidate_master.portfolio_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @candidate_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @candidate_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @candidate_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_candidate_master_path(@candidate_master) %> |
+<%= link_to 'Back', candidate_masters_path %>

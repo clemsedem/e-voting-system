@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Level Masters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Level</th>
+      <th>User</th>
+      <th>Active status</th>
+      <th>Del status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @level_masters.each do |level_master| %>
+      <tr>
+        <td><%= level_master.level %></td>
+        <td><%= level_master.user_id %></td>
+        <td><%= level_master.active_status %></td>
+        <td><%= level_master.del_status %></td>
+        <td><%= link_to 'Show', level_master %></td>
+        <td><%= link_to 'Edit', edit_level_master_path(level_master) %></td>
+        <td><%= link_to 'Destroy', level_master, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Level master', new_level_master_path %>

@@ -1,0 +1,15 @@
+<%= simple_form_for(@department_master) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :department_name %>
+    <%= f.input :faculty_id %>
+    <%= f.input :user_id %>
+    <%= f.input :active_status %>
+    <%= f.input :del_status %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

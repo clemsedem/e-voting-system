@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Faculty name:</strong>
+  <%= @faculty_master.faculty_name %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @faculty_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @faculty_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @faculty_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_faculty_master_path(@faculty_master) %> |
+<%= link_to 'Back', faculty_masters_path %>

@@ -1,0 +1,16 @@
+<%= simple_form_for(@vote_result) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :portfolio_id %>
+    <%= f.input :voter_id %>
+    <%= f.input :candidate_id %>
+    <%= f.input :user_id %>
+    <%= f.input :active_status %>
+    <%= f.input :del_status %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

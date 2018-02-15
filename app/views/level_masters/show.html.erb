@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Level:</strong>
+  <%= @level_master.level %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @level_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @level_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @level_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_level_master_path(@level_master) %> |
+<%= link_to 'Back', level_masters_path %>

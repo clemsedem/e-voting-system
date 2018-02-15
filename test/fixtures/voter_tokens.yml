@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  voter_id: MyString
+  token: MyString
+  user_id: 1
+  active_status: false
+  del_status: false
+
+two:
+  voter_id: MyString
+  token: MyString
+  user_id: 1
+  active_status: false
+  del_status: false

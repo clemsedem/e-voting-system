@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gender: MyString
+  user_id: 1
+  active_status: false
+  del_status: false
+
+two:
+  gender: MyString
+  user_id: 1
+  active_status: false
+  del_status: false

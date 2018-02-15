@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Department name:</strong>
+  <%= @department_master.department_name %>
+</p>
+
+<p>
+  <strong>Faculty:</strong>
+  <%= @department_master.faculty_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @department_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @department_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @department_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_department_master_path(@department_master) %> |
+<%= link_to 'Back', department_masters_path %>

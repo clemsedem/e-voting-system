@@ -1,0 +1,2 @@
+module LevelMastersHelper
+end

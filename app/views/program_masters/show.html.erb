@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Program name:</strong>
+  <%= @program_master.program_name %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @program_master.department_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @program_master.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @program_master.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @program_master.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_program_master_path(@program_master) %> |
+<%= link_to 'Back', program_masters_path %>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ref_id: MyString
+  portfolio: MyString
+  user_id: 1
+  active_status: false
+  del_status: false
+
+two:
+  ref_id: MyString
+  portfolio: MyString
+  user_id: 1
+  active_status: false
+  del_status: false

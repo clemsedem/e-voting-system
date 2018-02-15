@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Portfolio:</strong>
+  <%= @vote_result.portfolio_id %>
+</p>
+
+<p>
+  <strong>Voter:</strong>
+  <%= @vote_result.voter_id %>
+</p>
+
+<p>
+  <strong>Candidate:</strong>
+  <%= @vote_result.candidate_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @vote_result.user_id %>
+</p>
+
+<p>
+  <strong>Active status:</strong>
+  <%= @vote_result.active_status %>
+</p>
+
+<p>
+  <strong>Del status:</strong>
+  <%= @vote_result.del_status %>
+</p>
+
+<%= link_to 'Edit', edit_vote_result_path(@vote_result) %> |
+<%= link_to 'Back', vote_results_path %>

@@ -1,0 +1,47 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Registered Voters</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Voter</th>
+      <th>Surname</th>
+      <th>Other names</th>
+      <th>Level</th>
+      <th>Session</th>
+      <th>Program</th>
+      <th>Gender</th>
+      <th>Vote status</th>
+      <th>User</th>
+      <th>Active status</th>
+      <th>Del status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @registered_voters.each do |registered_voter| %>
+      <tr>
+        <td><%= registered_voter.voter_id %></td>
+        <td><%= registered_voter.surname %></td>
+        <td><%= registered_voter.other_names %></td>
+        <td><%= registered_voter.level_id %></td>
+        <td><%= registered_voter.session_id %></td>
+        <td><%= registered_voter.program_id %></td>
+        <td><%= registered_voter.gender_id %></td>
+        <td><%= registered_voter.vote_status %></td>
+        <td><%= registered_voter.user_id %></td>
+        <td><%= registered_voter.active_status %></td>
+        <td><%= registered_voter.del_status %></td>
+        <td><%= link_to 'Show', registered_voter %></td>
+        <td><%= link_to 'Edit', edit_registered_voter_path(registered_voter) %></td>
+        <td><%= link_to 'Destroy', registered_voter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Registered voter', new_registered_voter_path %>
