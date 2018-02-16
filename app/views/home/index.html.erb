@@ -1,2 +1,10 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+<div class="container" style="min-width: 75%">
+	  <% if flash[:notice] %>
+		 <p class="flash_notice " id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+	  <% end %>
+	  
+	<h1>Home#index</h1>
+	<p>Find me in app/views/home/index.html.erb</p>
+	
+</div>
