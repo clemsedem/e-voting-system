@@ -1,29 +1,44 @@
-<p id="notice"><%= notice %></p>
+<br />
+<div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
+    <div class="w3-modal-content w3-animate-top w3-card-4 w3-light-gray" style="width: 33%; max-height: 80%; overflow-y: auto;">
+    	<div style="max-width: 70%; text-align: center; margin-left: 15%; margin-top: 15px">
+      
+	    	<% if flash[:notice] %>
+                <p class="flash_notice " id = 'notes' style = ""><%= notice %></p>
+		  	 <% end %>
+		  	
+    	</div>	   
+      <header class="w3-container">  
+        <h4>Portfolio Details</h4> 
+      </header>          
+           <div class="w3-container" > 				 		      	
+              <table class="table table-condensed table-bordered table-striped">
+              	 <tr><td class="w3-teal"><strong>Portfolio: </strong></td><td style="padding-left: 6%""><%=  @portfolio_master.portfolio %></td></tr>
+              	 <tr><td class="w3-teal"><strong>Unique ID: </strong></td><td style="padding-left: 6%""><%=  @portfolio_master.ref_id %></td></tr>
+				 <tr><td class="w3-teal" ><strong>Added By: </strong></td><td style="padding-left: 6%""><%=  @portfolio_master.user_id %></td></tr>
+				 <% if  @portfolio_master.active_status == true %>  
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%"> Active </td></tr>
+		      		
+		      	 <%elsif  @portfolio_master.active_status == false %>
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%; color: red">Inactive</td></tr>
+		         <%end%>	
+			</table>
+              
+           </div>
+        <br>
+      <footer class="w3-container">
+        <%= link_to 'Back', portfolio_masters_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+      <br />
+      </footer>
+      <br />
+    </div>
+    <br />
+</div>
 
-<p>
-  <strong>Ref:</strong>
-  <%= @portfolio_master.ref_id %>
-</p>
-
-<p>
-  <strong>Portfolio:</strong>
-  <%= @portfolio_master.portfolio %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @portfolio_master.user_id %>
-</p>
-
-<p>
-  <strong>Active status:</strong>
-  <%= @portfolio_master.active_status %>
-</p>
-
-<p>
-  <strong>Del status:</strong>
-  <%= @portfolio_master.del_status %>
-</p>
-
-<%= link_to 'Edit', edit_portfolio_master_path(@portfolio_master) %> |
-<%= link_to 'Back', portfolio_masters_path %>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 3000);
+  });
+</script>

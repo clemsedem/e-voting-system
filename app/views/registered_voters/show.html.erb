@@ -1,59 +1,57 @@
-<p id="notice"><%= notice %></p>
+<br />
+<div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
+    <div class="w3-modal-content w3-animate-top w3-card-4 w3-light-gray" style="width: 33%; max-height: 80%; overflow-y: auto;">
+    	<div style="max-width: 70%; text-align: center; margin-left: 15%; margin-top: 15px">
+      
+	    	<% if flash[:notice] %>
+                <p class="flash_notice " id = 'notes' style = ""><%= notice %></p>
+		  	 <% end %>
+		  	
+    	</div>	   
+      <header class="w3-container">  
+        <h4>Voter Details</h4> 
+      </header>          
+           <div class="w3-container" > 				 		      	
+              <table class="table table-condensed table-bordered table-striped">
+              	<tr><td class="w3-teal"><strong>Voter ID: </strong></td><td style="padding-left: 6%""><%= @registered_voter.voter_id %></td></tr>
+              	 <tr><td class="w3-teal"><strong>Voter Full Name : </strong></td><td style="padding-left: 6%""><%= @registered_voter.surname %> <%= @registered_voter.other_names %></td></tr>
+              	 <tr><td class="w3-teal"><strong>Gender: </strong></td><td style="padding-left: 6%""><%= @registered_voter.gender %></td></tr>
+				 <tr><td class="w3-teal"><strong>Level: </strong></td><td style="padding-left: 6%""><%= @registered_voter.level_master.level %></td></tr>
+				 <tr><td class="w3-teal"><strong>Session: </strong></td><td style="padding-left: 6%""><%= @registered_voter.session_master.session %></td></tr>
+				 <tr><td class="w3-teal"><strong>Program: </strong></td><td style="padding-left: 6%""><%= @registered_voter.program_master.program_name %></td></tr>
+			 	
+			 	 <% if @registered_voter.vote_status == true %> 
+			 	   <tr><td class="w3-teal"><strong>Gender: </strong></td><td style="padding-left: 6%"">Voted Already</td></tr> 	      		 
+		        <%elsif @registered_voter.vote_status == false %>
+		            <tr><td class="w3-teal"><strong>Gender: </strong></td><td style="padding-left: 6%"">Yet to Vote</td></tr>	      		
+		        <%end%>
+			 
+				 <tr><td class="w3-teal" ><strong>Added By: </strong></td><td style="padding-left: 6%""><%= @registered_voter.user_id %></td></tr>
+				 <% if @registered_voter.active_status == true %>  
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%"> Active </td></tr>
+		      		
+		      	 <%elsif @registered_voter.active_status == false %>
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%; color: red">Inactive</td></tr>
+		         <%end%>	
+			</table>
+              
+           </div>
+        <br>
+      <footer class="w3-container">
+        <%= link_to 'Back', registered_voters_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+      <br />
+      </footer>
+      <br />
+    </div>
+    <br />
+</div>
 
-<p>
-  <strong>Voter:</strong>
-  <%= @registered_voter.voter_id %>
-</p>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 3000);
+  });
+</script>
 
-<p>
-  <strong>Surname:</strong>
-  <%= @registered_voter.surname %>
-</p>
 
-<p>
-  <strong>Other names:</strong>
-  <%= @registered_voter.other_names %>
-</p>
-
-<p>
-  <strong>Level:</strong>
-  <%= @registered_voter.level_id %>
-</p>
-
-<p>
-  <strong>Session:</strong>
-  <%= @registered_voter.session_id %>
-</p>
-
-<p>
-  <strong>Program:</strong>
-  <%= @registered_voter.program_id %>
-</p>
-
-<p>
-  <strong>Gender:</strong>
-  <%= @registered_voter.gender_id %>
-</p>
-
-<p>
-  <strong>Vote status:</strong>
-  <%= @registered_voter.vote_status %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @registered_voter.user_id %>
-</p>
-
-<p>
-  <strong>Active status:</strong>
-  <%= @registered_voter.active_status %>
-</p>
-
-<p>
-  <strong>Del status:</strong>
-  <%= @registered_voter.del_status %>
-</p>
-
-<%= link_to 'Edit', edit_registered_voter_path(@registered_voter) %> |
-<%= link_to 'Back', registered_voters_path %>

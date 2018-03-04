@@ -50,3 +50,7 @@ gem 'rails_layout', '~> 1.0', '>= 1.0.26'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.3'
+
+gem 'will_paginate', '~> 3.1', '>= 3.1.5'
+gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
+gem "paperclip", "~> 5.2.1"

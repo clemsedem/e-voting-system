@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215192326) do
+ActiveRecord::Schema.define(version: 20180304001325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,9 +22,13 @@ ActiveRecord::Schema.define(version: 20180215192326) do
     t.integer  "user_id"
     t.boolean  "active_status"
     t.boolean  "del_status"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.integer  "slot_id"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   create_table "department_masters", force: :cascade do |t|
@@ -76,7 +80,7 @@ ActiveRecord::Schema.define(version: 20180215192326) do
 
   create_table "program_masters", force: :cascade do |t|
     t.string   "program_name"
-    t.string   "department_id"
+    t.integer  "department_id"
     t.integer  "user_id"
     t.boolean  "active_status"
     t.boolean  "del_status"
@@ -91,7 +95,7 @@ ActiveRecord::Schema.define(version: 20180215192326) do
     t.integer  "level_id"
     t.integer  "session_id"
     t.integer  "program_id"
-    t.integer  "gender_id"
+    t.string   "gender"
     t.boolean  "vote_status"
     t.integer  "user_id"
     t.boolean  "active_status"

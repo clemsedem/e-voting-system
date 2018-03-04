@@ -1,24 +1,46 @@
-<p id="notice"><%= notice %></p>
+<br />
+<div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
+    <div class="w3-modal-content w3-animate-top w3-card-4 w3-light-gray" style="width: 33%; max-height: 80%; overflow-y: auto;">
+    	<div style="max-width: 70%; text-align: center; margin-left: 15%; margin-top: 15px">
+      
+	    	<% if flash[:notice] %>
+                <p class="flash_notice " id = 'notes' style = ""><%= notice %></p>
+		  	 <% end %>
+		  	
+    	</div>	   
+      <header class="w3-container">  
+        <h4>Session Details</h4> 
+      </header>          
+           <div class="w3-container" > 				 		      	
+              <table class="table table-condensed table-bordered table-striped">
+              	 <tr><td class="w3-teal"><strong>Session: </strong></td><td style="padding-left: 6%""><%=  @session_master.session %></td></tr>
+				 <tr><td class="w3-teal" ><strong>Added By: </strong></td><td style="padding-left: 6%""><%=  @session_master.user_id %></td></tr>
+				 <% if  @session_master.active_status == true %>  
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%"> Active </td></tr>
+		      		
+		      	 <%elsif  @session_master.active_status == false %>
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%; color: red">Inactive</td></tr>
+		         <%end%>	
+			</table>
+              
+           </div>
+        <br>
+      <footer class="w3-container">
+        <%= link_to 'Back', session_masters_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+      <br />
+      </footer>
+      <br />
+    </div>
+    <br />
+</div>
 
-<p>
-  <strong>Session:</strong>
-  <%= @session_master.session %>
-</p>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 3000);
+  });
+</script>
 
-<p>
-  <strong>User:</strong>
-  <%= @session_master.user_id %>
-</p>
 
-<p>
-  <strong>Active status:</strong>
-  <%= @session_master.active_status %>
-</p>
 
-<p>
-  <strong>Del status:</strong>
-  <%= @session_master.del_status %>
-</p>
-
-<%= link_to 'Edit', edit_session_master_path(@session_master) %> |
-<%= link_to 'Back', session_masters_path %>

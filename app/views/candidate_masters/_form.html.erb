@@ -1,15 +1,70 @@
+<br>
 <%= simple_form_for(@candidate_master) do |f| %>
   <%= f.error_notification %>
 
-  <div class="form-inputs">
-    <%= f.input :voter_id %>
-    <%= f.input :portfolio_id %>
-    <%= f.input :user_id %>
-    <%= f.input :active_status %>
-    <%= f.input :del_status %>
-  </div>
+<div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
+    <div class="w3-modal-content w3-animate-top w3-card-4 w3-light-gray" style="width: 33%; max-height: 80%; overflow-y: auto;">
+    	<div style="max-width: 70%; text-align: center; margin-left: 15%; margin-top: 15px">
+      
+	    	<% if flash[:notice] %>
+                <p class="flash_notice " id = 'notes' style = ""><%= notice %></p>
+		  	 <% end %>
+		  	
+    	</div>	   
+      <header class="w3-container">  
+        <h4>Add a Candidate</h4>  
+      </header>          
+           <div class="w3-container" > 				 		      	
+              
+               <div class="form-inputs">
+	                <%= f.input :voter_id, label: "Enter candidate name", collection:  @the_list,  label_method: :first, value_method: :last, input_html:{class:"combobox"} %>
+   					<%= f.input :portfolio_id, collection: PortfolioMaster.all, label_method: :portfolio, value_method: :ref_id %>
+				    <%= f.input :user_id, as: :hidden %>
+				    <%= f.input :active_status, as: :hidden, input_html: {value: 1} %>
+				    <%= f.input :del_status, as: :hidden, input_html: {value: 0} %>
+				    
+				    <br />
+				    <%= f.input :image, as: :file, label: "Upload Image" %>
+               </div> 
+           </div>
+        <br>
+      <footer class="w3-container">
+       	<%= f.button :submit, class: "w3-button w3-teal w3-hover-teal w3-right w3-card-4 w3-small w3-round-xlarge", value: "Add" %>
+        <%= link_to 'Back', candidate_masters_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+      <br />
+      </footer>
+      <% end %>
+      <br />
+    </div>
+    <br />
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
-  </div>
-<% end %>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 3000);
+  });
+</script>
+
+
+<style>
+	.input-group{
+		width: 100%;
+  	}
+    .typeahead{
+    width: 100%;
+  }
+  
+</style>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+         $('form').attr('autocomplete', 'off');
+        
+         $('.combobox').combobox();
+    
+   $('span.input-group-addon').addClass("hidden");
+  
+    });
+</script>

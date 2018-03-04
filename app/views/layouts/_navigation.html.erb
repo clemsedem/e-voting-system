@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default w3-card-4 w3-border navbar-fixed-top my-nav" style="">
+<nav class="navbar navbar-default w3-card-4 w3-border navbar-fixed-top my-nav" style="margin-bottom: 20px">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -8,36 +8,36 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <button id="openNav" class="w3-button w3-left w3-hover-white w3-tiny" onclick="w3_open()" style="margin-right: 10px; margin-top: 5px; ">&#9776;</button>
+      <!-- <button id="openNav" class="w3-button w3-left w3-hover-white w3-tiny" onclick="w3_open()" style="margin-right: 10px; margin-top: 5px; ">&#9776;</button> -->
      
-      <a class=" w3-card"  href="#"> 
+      <%= link_to root_path do %> 
+		 <%= image_tag ('vote32.png'), class: "w3-left w3-margin-right w3-margin-left", style: "margin-top: 5px" %>
+      	 <b class="navbar-brand " style="color:#fff; ">Electronic Voting System</b></a>
+	  <% end %>
+      <!-- <span class=" w3-card"  > 
       	 <%= image_tag ('vote32.png'), class: "w3-left w3-margin-right w3-margin-left", style: "margin-top: 5px" %>
       	<b class="navbar-brand " style="color:#fff; ">Electronic Voting System</b></a>
+    </span> -->
     </div>
   
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     
-      <ul class="nav navbar-nav navbar-right ">
-      	<a href="#" class="navbar-brand"> <b style="color: #fff"><span class="fa fa-sign-out  "></span> Sign Out</b></a>
-        <!-- <li class="dropdown">
-        
-          <a href="#" class="dropdown-toggle w3-hover-none" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false" style="color: #fff">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu w3-card">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li role="separator" class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-          </ul>
-        </li> --> 
+    	
+     	<ul class="nav navbar-nav w3-hide-large w3-white">
+	        <li style="text-align: left;"><%= render 'layouts/navigation_links' %></li> 
+
+	        <li class="w3-card"><a href="#" > <span class="fa fa-power-off "></span> Sign Out</b></a></li>
+	    </ul>
+      
+      <ul class="nav navbar-nav navbar-right" id="signout">
+      	<a href="#" class="navbar-brand"> <b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b></a>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
   
-     <div class="w3-sidebar w3-bar-block w3-card  w3-animate-left " style="display: none;" id="mySidebar">
-	     <span class="w3-right w3-border w3-card w3-tiny w3-white w3-button w3-margin fa-2x w3-hover-white" onclick="w3_close()" style="margin-bottom: 10px" >&#9776;</span>
-
+     <div class="w3-sidebar w3-bar-block w3-card w3-left" style="display: ;"  id="mySidebar">
+	     <!-- <span class="w3-right w3-border w3-card w3-tiny w3-white w3-button w3-margin fa-2x w3-hover-white" onclick="w3_close()" style="margin-bottom: 10px" >&#9776;</span> -->
+		<br />
 	    <div class="w3-clear"></div>
 	    <%= render 'layouts/navigation_links' %>
 			   
@@ -47,19 +47,20 @@
 <br /><br /><br />
 
 
-<!-- Toggele side bar script -->
+<!-- Toggele side bar script --> 
 <script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "10%";
-  document.getElementById("mySidebar").style.width = "20%";
+
+// function w3_open() {
+  // document.getElementById("main").style.marginLeft = "10%";
+  // document.getElementById("mySidebar").style.width = "20%";
   // document.getElementById("mySidebar").style.background = "rgba(0, 0, 0, .6)";
-  document.getElementById("mySidebar").style.backgroundImage = "url('https://mdbootstrap.com/img/Photos/Others/sidenav4.jpg') " ; 
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
+  // document.getElementById("mySidebar").style.backgroundImage = "url('/assets/sidenav4.jpg') " ; //url('https://mdbootstrap.com/img/Photos/Others/sidenav4.jpg')
+  // document.getElementById("mySidebar").style.display = "block";
+  // document.getElementById("openNav").style.display = 'none';
+// }
+// function w3_close() {
+  // document.getElementById("main").style.marginLeft = "0%";
+  // document.getElementById("mySidebar").style.display = "none";
+  // document.getElementById("openNav").style.display = "inline-block";
+// }
 </script>
