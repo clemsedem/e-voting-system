@@ -8,16 +8,30 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
     <%= csrf_meta_tags %>
   </head>
-  <body >
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
+  <!-- <body > -->
+    <!-- <header> -->
+      <!-- <%#= render 'layouts/navigation' %> -->
+    <!-- </header>  -->
+   
+   <% if user_signed_in? %> 
+      <body >
+	    <header>
+	      <%= render 'layouts/navigation' %>
+	    </header>
+   
+	    <div class="container-fluid" id="main" onclick="w3_close()" >
+		      <!-- <%= render 'layouts/messages' %> -->
+		      <%= yield %>
+	    </div>
+    </body>
     
-    <div class="container-fluid" id="main" onclick="w3_close()" >
-	      <!-- <%= render 'layouts/messages' %> -->
-	      <%= yield %>
-    </div>
-      
+    
+   <%else%>
+   
+	<body style="background: " id="login-page">
+    	 <%= yield %>
+    
+   <%end%>  
    
   </body>
 </html>

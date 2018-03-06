@@ -1,3 +1,5 @@
+<% if user_signed_in? %>
+
 <nav class="navbar navbar-default w3-card-4 w3-border navbar-fixed-top my-nav" style="margin-bottom: 20px">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -24,13 +26,18 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
     	
      	<ul class="nav navbar-nav w3-hide-large w3-white">
-	        <li style="text-align: left;"><%= render 'layouts/navigation_links' %></li> 
+	        <li style="text-align: left;"><%= render 'layouts/navigation_links'  %></li> 
 
-	        <li class="w3-card"><a href="#" > <span class="fa fa-power-off "></span> Sign Out</b></a></li>
 	    </ul>
       
       <ul class="nav navbar-nav navbar-right" id="signout">
-      	<a href="#" class="navbar-brand"> <b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b></a>
+      	
+      	<%= link_to destroy_user_session_path, method: :delete,  class: "navbar-brand" do %>
+          	<b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b>
+			<!-- <i class="fa fa-power-off" aria-hidden="true"></i> <span style="margin-left:;">Sign Out</span>  -->
+		<% end %>  
+      	
+      	<!-- <a href="#" class="navbar-brand"> <b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b></a> -->
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -46,7 +53,7 @@
 </nav>
 <br /><br /><br />
 
-
+<%end%>
 <!-- Toggele side bar script --> 
 <script>
 

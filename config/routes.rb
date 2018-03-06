@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users
+  # devise_for :models
   resources :vote_results
   resources :voter_tokens
   resources :registered_voters
@@ -12,6 +14,23 @@ Rails.application.routes.draw do
   resources :level_masters
   
  root to: 'home#index'
+ 
+ 
+ 
+ devise_scope :user do
+    get '/users/sign_up' => 'users#sign_in'
+  end
+
+  get '/users' => 'users#index'
+
+  get '/users/new' => 'users#new', :as => 'new_user'
+  post 'create_user' => 'users#create', as: :create_user
+  get '/users/:id/edit' => 'users#edit', :as => 'edit_user'
+
+  get '/users/:id' => 'users#show', :as => 'user'
+  delete 'users/:id' => 'users#destroy'
+  patch '/users/:id' => 'users#update', :as => 'update_user'
+ 
    
  # Enable and disable faculty
  get       'enable_faculty'    =>  'faculty_masters#enable_faculty'

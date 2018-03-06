@@ -1,0 +1,264 @@
+<div class="container" id = "page-container" >
+<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>	
+
+<h4>Sessions</h4>
+
+<br />
+	<p style = 'text-align: center; font-family: tahoma; font-size: 15px;'>
+  		 <b>Download:</b>  
+                      <%= link_to "CSV", all_session_excel_path(format: "csv"), :class => "w3-hover-white", method: :get%> 
+                     | <%= link_to "Excel", all_session_excel_path(format: "xls"),:class => "w3-hover-white", method: :get%>
+	</p>
+	
+	
+	<div class="pull-left" style = 'margin-top: %;'>
+	   <%= form_tag users_path, method: :get,  input_html:{display:"block"} do %>
+			<div class="radio_div">
+			   <b>Filter By:</b><br />
+			   <input id="session" type="radio" name="search_param" value="session" class = "w3-radio" /> Session
+		       <!-- <input id="department_name" type="radio" name="search_param" value="department_name" class = "w3-radio" /> Department    -->
+									   
+			   <!-- <input id="location" type="radio" name="search_param" value="location" class = "w3-radio" /> Location  --> 
+						
+			   <input id="date" type="radio" name="search_param" value="date" class = "w3-radio" /> Date  
+			</div>
+					
+										
+			<div class="form-inline" style = 'margin-top: 5px; margin-bottom: '>
+				<input id="search-field" class="hidden w3-input w3-border w3-round form-control"  name="search_value" />
+				<input type="submit" id="search-field2" class=" hidden w3-button w3-blue w3-round-xxlarge w3-small" value="Search"  >
+			</div>
+					
+			<div id="date_div" class="form-inline" style ="margin-top: 5px; margin-bottom:">
+		         <input type="text" class="hidden w3-input w3-border w3-round form-control" data-provide='datepicker' name="start_date" id="date-field" placeholder="Start date "/>
+		         <span class="add-on hidden" id = 'to'> to </span>
+		                
+		         <input type="text" class="hidden w3-input w3-border w3-round form-control" data-provide='datepicker' name="end_date" id="date-field2" placeholder="End date "/>
+		               
+		         <input type="submit" id="search-field3" class=" hidden w3-button w3-blue w3-round-xxlarge w3-small" value="Search" style = "margin-left: 5px;" >
+	  
+	       </div>
+	      
+	                
+	    <% end %>
+	   
+	</div>
+	
+	 <div class="pull-right" style = 'margin-top: %; '>
+	  <label class="">Display <u>No</u>: </label>  
+	   <%= select_tag :per_page, options_for_select([10, 20, 30, 40,50, 70,100], params[:per_page].to_i), :data => { :remote => true, 
+	 	            :url => url_for( :controller => "users", :action => "index" )
+	 	             }, :onchange => "if(this.value){window.location='?per_page='+this.value;}", class: "w3-bordered w3-round-xlarge w3-btn w3-small w3-card-4 w3-white" %>	
+     </div>
+     <div class="clearfix"></div>
+	<br />
+
+
+
+<div class="table-responsive" id="table">
+	<table class="table table-condensed table-bordered table-striped w3-card">
+	  <thead>
+	    <tr class="w3-pale-blue">
+	      <th>S/N</th>
+	      <th>Surname</th>
+	      <th>Other Names</th>
+	      <th>Email</th>
+	      <th>Added By</th>
+	      <th>Status</th>
+	      <th colspan="2">Options</th>
+	    </tr> 
+	  </thead>
+	
+	  <tbody>
+	    <% @users.each_with_index do |user, index| %>
+	      <tr>
+	      	<td style="width: 5px"><%= index+1 %></td>
+	      	<td><%= user.surname %></td>
+	      	<td><%= user.other_names %></td>
+	      	<td><%= user.username %></td>
+	        <td><%= user.email %></td>
+	        
+	        <td style="width: 10px">
+		        <%= link_to  user, class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge " do %>
+				    <i class="fa fa-eye fa-2x" style="color: blue" aria-hidden="true" title="Edit Faculty"> </i>  
+			    <% end %> 		        	
+		    </td>
+	        
+	        <td style="width: 10px">
+		        <%= link_to  edit_user_path(user), class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge " do %>
+				    <i class="fa fa-edit fa-2x" style="color: blue" aria-hidden="true" title="Edit Faculty"> </i>  
+			    <% end %> 		        	
+		    </td>
+		
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>
+<br>
+
+<%= link_to '+', new_user_path, class: "w3-button w3-circle w3-light-blue w3-hover-pale-blue" %>
+<%= will_paginate @users,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "users", :action => "index", count: params[:count], page: params[:page] }  %>
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 4000);
+ });
+ 
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $(".radio_div div input").click(function() {
+            $("#date_div").addClass("hidden");
+            $("#search-field").removeClass("hidden");
+            $("#narrative_div").addClass("hidden");
+            //$("#date_div").fadeIn('slow');
+        });
+        
+        // filter by faculty
+        $("#session").click(function() {
+            if ($("#session").is(":checked")) {
+                $("#search-field").attr("placeholder", "Enter the session");
+                $("#search-field2").removeClass("hidden")
+                $("#search-field").removeClass("hidden");
+                $("#date-field").addClass("hidden");
+                $("#date-field2").addClass("hidden");
+                $("#search-field3").addClass("hidden")
+                $("#to").addClass("hidden");
+            }
+        });
+        
+        // filter by department
+        $("#department_name").click(function() {
+            if ($("#department_name").is(":checked")) {
+                $("#search-field").attr("placeholder", "Enter the department name");
+                $("#search-field2").removeClass("hidden");
+                $("#search-field").removeClass("hidden");
+                $("#date-field").addClass("hidden");
+                $("#date-field2").addClass("hidden");
+                $("#search-field3").addClass("hidden")
+                $("#to").addClass("hidden");
+            }
+        });
+        
+       
+      
+        
+        ////////////////////////////////////////////////////////////////////////////
+        $("#location").click(function() {
+            if ($("#location").is(":checked")) {
+                $("#search-field").attr("placeholder", "Enter the location");
+                $("#date_div").addClass("hidden");
+                $("#search-field").removeClass("hidden");
+                $("#search-field2").removeClass("hidden")
+            }
+        });
+        $("#recipient_number").click(function() {
+            if ($("#recipient_number").is(":checked")) {
+                $("#search-field").attr("placeholder", "Recipient Number");
+                $("#date_div").addClass("hidden");
+                $("#search-field").removeClass("hidden");
+            }
+        });
+        
+        
+         //////////////////////////clicking on filter by date
+        $("#date").click(function() {
+            //if ($("#date").is(":checked")){
+            $("#date_div").removeClass("hidden");
+            $("#search-field").addClass("hidden");
+            $("#date-field").removeClass("hidden");
+            $("#date-field2").removeClass("hidden");
+            $("#search-field2").addClass("hidden");
+            $("#search-field").addClass("hidden");
+            $("#search-field3").removeClass("hidden");
+            $("#to").removeClass("hidden");
+            //$("#date_div").fadeIn('slow');
+            //}
+        });
+        
+        $("#date-field").click(function() {
+           // if ($("#date").is(":checked")){
+            $("#date_div").removeClass("hidden");
+            $("#search-field").addClass("hidden");
+            $("#date-field").removeClass("hidden");
+            $("#date-field2").removeClass("hidden");
+            // $("#search-field3").removeClass("hidden")
+            //$("#date_div").fadeIn('slow');
+            //}
+        });
+        $("#date-field2").click(function() {
+            //if ($("#date").is(":checked")){
+            $("#date_div").removeClass("hidden");
+            $("#search-field").addClass("hidden");
+            $("#date-field").removeClass("hidden");
+            $("#date-field2").removeClass("hidden");
+            $("#search-field3").removeClass("hidden")
+            //$("#date_div").fadeIn('slow');
+            //}
+        });
+        
+        
+        ///////////////////////////////////////////////////
+        $.fn.datepicker.noConflict = function() {
+            $.fn.datepicker = old;
+            return this;
+        };
+        ////////////////////////////////////////////////////
+        $(function() {
+            $('#date-field').datepicker({
+                dateFormat : 'yy-mm-dd'
+            }).val();
+        });
+        //////////////////////////////////////////////////////
+        $(function() {
+            $('#date-field2').datepicker({
+                dateFormat : 'yy-mm-dd'
+            });
+        });
+        
+        
+        
+     
+        // ///////////////////////////////////////////////////
+        // $.fn.datepicker.noConflict = function() {
+            // $.fn.datepicker = old;
+            // return this;
+        // };
+        // ////////////////////////////////////////////////////
+        // $(function() {
+            // $('#date-field').datepicker({
+                // dateFormat : 'yy-mm-dd'
+            // });
+        // });
+        // //////////////////////////////////////////////////////
+        // $(function() {
+            // $('#date-field2').datepicker({
+                // dateFormat : 'yy-mm-dd'
+            // });
+        // });
+//         
+        $('#csv').click(function() {
+            console.log('works!');
+            $('#csv_perpage').val($('#record').val());
+            $('#csv_page').val($('li.active span').html());
+            $('#csv_submit').click();
+            console.log('works!');
+        });
+        /////////////////////////////////////////////////////////////
+        $('#excel').click(function() {
+            $('#excel_perpage').val($('#record').val());
+            $('#excel_page').val($('li.active span').html());
+            $('#excel_submit').click();
+        });
+    });
+</script>
+
