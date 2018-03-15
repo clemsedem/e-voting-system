@@ -3,22 +3,22 @@
    <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
 <% end %>	
 
-<h4>System Users</h4>
+<h4>System Roles</h4>
 
 <br /> 
 	<p style = 'text-align: center; font-family: tahoma; font-size: 15px;'>
   		 <b>Download:</b>  
-                      <%= link_to "CSV", all_users_excel_path(format: "csv"), :class => "w3-hover-white", method: :get%> 
-                     | <%= link_to "Excel", all_users_excel_path(format: "xls"),:class => "w3-hover-white", method: :get%>
+                      <%= link_to "CSV", all_roles_excel_path(format: "csv"), :class => "w3-hover-white", method: :get%> 
+                     | <%= link_to "Excel", all_roles_excel_path(format: "xls"),:class => "w3-hover-white", method: :get%>
 	</p>
 	
 	 
 	<div class="pull-left" style = 'margin-top: %;'>
-	   <%= form_tag users_path, method: :get,  input_html:{display:"block"} do %>
+	   <%= form_tag roles_path, method: :get,  input_html:{display:"block"} do %>
 			<div class="radio_div">
-			   <b>Filter By:</b><br />
-			   <input id="username" type="radio" name="search_param" value="username" class = "w3-radio" /> Username
-		       <input id="role" type="radio" name="search_param" value="role" class = "w3-radio" /> Role  
+			   <b>Filter By:</b><br /> 
+			   <input id="name" type="radio" name="search_param" value="name" class = "w3-radio" /> Role Name
+		       <!-- <input id="department_name" type="radio" name="search_param" value="department_name" class = "w3-radio" /> Department    -->
 									   
 			   <!-- <input id="location" type="radio" name="search_param" value="location" class = "w3-radio" /> Location  --> 
 						
@@ -49,7 +49,7 @@
 	 <div class="pull-right" style = 'margin-top: %; '>
 	  <label class="">Display <u>No</u>: </label>  
 	   <%= select_tag :per_page, options_for_select([10, 20, 30, 40,50, 70,100], params[:per_page].to_i), :data => { :remote => true, 
-	 	            :url => url_for( :controller => "users", :action => "index" )
+	 	            :url => url_for( :controller => "roles", :action => "index" )
 	 	             }, :onchange => "if(this.value){window.location='?per_page='+this.value;}", class: "w3-bordered w3-round-xlarge w3-btn w3-small w3-card-4 w3-white" %>	
      </div>
      <div class="clearfix"></div>
@@ -62,50 +62,38 @@
 	  <thead>
 	    <tr class="w3-pale-blue">
 	      <th>S/N</th>
-	      <th>Surname</th>
-	      <th>Other Names</th>
-	      <th>Username</th>
-	      <th>Role</th>
+	      <th>Name</th>
 	      <th>Status</th>
 	      <th colspan="2">Options</th>
 	    </tr> 
 	  </thead>
 	
 	  <tbody>
-	    <% @users.each_with_index do |user, index| %>
+	    <% @roles.each_with_index do |role, index| %>
 	      <tr>
 	      	<td style="width: 5px"><%= index+1 %></td>
-	      	<td><%= user.surname %></td>
-	      	<td><%= user.other_names %></td>
-	      	<td><%= user.username %></td>
-	      	<td><%= user.role.name %></td>
-	        
-	        <% if user.active_status == true %>  
+	      	<td><%= role.name %></td>
+	      	
+	        <% if role.active_status == true %>  
 	            <td style="color: ">Active</td>	      		 
-	        <%elsif user.active_status == false %>
+	        <%elsif role.active_status == false %>
 	            <td style="color: red">Inactive</td>	      		
 	        <%end%>
-	         <!-- 
-	        <td style="width: 10px">
-		        <%= link_to  user, class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge " do %>
-				    <i class="fa fa-eye fa-2x" style="color: #9d06f585" aria-hidden="true" title="Edit Faculty"> </i>  
-			    <% end %> 		        	
-		    </td> --> 
 	        
 	        <td style="width: 10px">
-		        <%= link_to  edit_user_path(user), class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge " do %>
+		        <%= link_to  edit_role_path(role), class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge " do %>
 				    <i class="fa fa-edit fa-2x" style="color: blue" aria-hidden="true" title="Edit Faculty"> </i>  
 			    <% end %> 		        	
 		    </td>
 		    
 		   <td style="width: 10px"> 
-			    <% if user.active_status == false %>
-			       		<%= link_to  enable_user_path(:chosen => user.id), :title =>"", class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge ", data: { confirm: 'You are about to restore the selected user. Do you want to continue?' } do %>
+			    <% if role.active_status == false %>
+			       		<%= link_to  enable_role_path(:chosen => role.id), :title =>"", class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge ", data: { confirm: 'You are about to restore the selected role. Do you want to continue?' } do %>
 						  <i class="fa fa-check fa-2x" style="color: green" aria-hidden="true" title="Restore Department"> </i>  
 						<% end %> 
 			       
-		        <% else user.active_status == true %>
-		           		<%= link_to  disable_user_path(:chosen => user.id), class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge ", data: { confirm: 'You are about to delete the selected user. Do you want to continue?' } do %>
+		        <% else role.active_status == true %>
+		           		<%= link_to  disable_role_path(:chosen => role.id), class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge ", data: { confirm: 'You are about to delete the selected role. Do you want to continue?' } do %>
 						  <i class="fa fa-trash-o fa-2x" style="color: red" aria-hidden="true" title="Delete Department"> </i>  
 		                <% end %>		          
 		        <% end %>	
@@ -120,8 +108,8 @@
 </div>
 <br>
 
-<%= link_to '+', new_user_path, class: "w3-button w3-circle w3-light-blue w3-hover-pale-blue" %>
-<%= will_paginate @users,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "users", :action => "index", count: params[:count], page: params[:page] }  %>
+<%= link_to '+', new_role_path, class: "w3-button w3-circle w3-light-blue w3-hover-pale-blue" %>
+<%= will_paginate @roles,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "roles", :action => "index", count: params[:count], page: params[:page] }  %>
 </div>
 
 
@@ -145,9 +133,9 @@ $(document).ready(function(){
         });
         
         // filter by faculty
-        $("#username").click(function() {
-            if ($("#username").is(":checked")) {
-                $("#search-field").attr("placeholder", "Enter username");
+        $("#name").click(function() {
+            if ($("#name").is(":checked")) {
+                $("#search-field").attr("placeholder", "Enter rolename");
                 $("#search-field2").removeClass("hidden")
                 $("#search-field").removeClass("hidden");
                 $("#date-field").addClass("hidden");
@@ -157,10 +145,10 @@ $(document).ready(function(){
             }
         });
         
-        // filter by role
-        $("#role").click(function() {
-            if ($("#role").is(":checked")) {
-                $("#search-field").attr("placeholder", "Enter the role");
+        // filter by department
+        $("#department_name").click(function() {
+            if ($("#department_name").is(":checked")) {
+                $("#search-field").attr("placeholder", "Enter the department name");
                 $("#search-field2").removeClass("hidden");
                 $("#search-field").removeClass("hidden");
                 $("#date-field").addClass("hidden");
@@ -282,4 +270,3 @@ $(document).ready(function(){
         });
     });
 </script>
-

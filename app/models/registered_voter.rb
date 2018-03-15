@@ -20,6 +20,15 @@ class RegisteredVoter < ActiveRecord::Base
   
   
   
+  # verify voter
+  def self.verify(voter_id)
+    voter_id = "#{voter_id}"
+    where('voter_id =?', voter_id)
+  end
+  
+  
+  
+  
   def titler_surname
       str_list = self.surname.split
   

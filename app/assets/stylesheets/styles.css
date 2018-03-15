@@ -76,11 +76,17 @@ h4{
    #main{margin: 0%;}
    #search-field2{margin-top: 10px;}
    #search-field3{margin-top: 10px;}
+   #tit11{ margin-bottom: 15%; }
+   img.loader{ margin-top: 10%; }
 }
  
   
 #login-page{
 	background-image: url('/assets/mybg32.jpg');
+}
+
+#verify-page{
+	background-image: url('/assets/white-bg1.jpg');
 }
  
  

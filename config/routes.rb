@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
+  resources :add_voter_reasons
+  # get 'verification_page/index'
+
   devise_for :users
   # devise_for :models
+  resources :roles
   resources :vote_results
   resources :voter_tokens
   resources :registered_voters
@@ -14,6 +18,13 @@ Rails.application.routes.draw do
   resources :level_masters
   
  root to: 'home#index'
+ 
+ # verification page
+  get '/verification_page/index' => 'verification_page#index', :as => 'verification_page'
+  
+  # verify voter
+  get 'verify_voter'   =>  'verification_page#verify_voter'
+  
  
  
  
@@ -60,9 +71,17 @@ Rails.application.routes.draw do
  get       'enable_voter'   =>  'registered_voters#enable_voter'
  get       'disable_voter'   =>  'registered_voters#disable_voter'
  
- # Enable and disable candidat
+ # Enable and disable candidate
  get       'enable_candidate'   =>  'candidate_masters#enable_candidate'
  get       'disable_candidate'   =>  'candidate_masters#disable_candidate'
+ 
+ # Enable and disable user
+ get       'enable_user'   =>  'users#enable_user'
+ get       'disable_user'   =>  'users#disable_user'
+ 
+  # Enable and disable role
+ get       'enable_role'   =>  'roles#enable_role'
+ get       'disable_role'   =>  'roles#disable_role'
  
  
  
@@ -91,6 +110,14 @@ Rails.application.routes.draw do
  
  # Download excel and cvs for candidates
  get 'all_candidate_excel' => 'candidate_masters#all_candidate_excel'
+ 
+  # Download excel and cvs for users
+ get 'all_users_excel' => 'users#all_users_excel'
+ 
+  # Download excel and cvs for roles
+ get 'all_roles_excel' => 'roles#all_roles_excel'
+ 
+ 
  
   
 end

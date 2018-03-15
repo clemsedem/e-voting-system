@@ -42,13 +42,15 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
   
+  <% if current_user.role.name == 'Super Admin'%>
      <div class="w3-sidebar w3-bar-block w3-card w3-left" style="display: ;"  id="mySidebar">
 	     <!-- <span class="w3-right w3-border w3-card w3-tiny w3-white w3-button w3-margin fa-2x w3-hover-white" onclick="w3_close()" style="margin-bottom: 10px" >&#9776;</span> -->
 		<br />
 	    <div class="w3-clear"></div>
 	    <%= render 'layouts/navigation_links' %>
 			   
-  </div>
+      </div>
+ <%end%>
   
 </nav>
 <br /><br /><br />

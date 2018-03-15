@@ -1,0 +1,43 @@
+<br />
+<div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
+    <div class="w3-modal-content w3-animate-top w3-card-4 w3-light-gray" style="width: 33%; max-height: 80%; overflow-y: auto;">
+    	<div style="max-width: 70%; text-align: center; margin-left: 15%; margin-top: 15px">
+      
+	    	<% if flash[:notice] %>
+                <p class="flash_notice " id = 'notes' style = ""><%= notice %></p>
+		  	 <% end %>
+		  	
+    	</div>	   
+      <header class="w3-container">  
+        <h4>Details  Details</h4> 
+      </header>          
+           <div class="w3-container" > 				 		      	
+              <table class="table table-condensed table-bordered table-striped">
+              	 <tr><td class="w3-teal"><strong>RoleName: </strong></td><td style="padding-left: 6%""><%= @role.name %></td></tr>
+				 <!-- <tr><td class="w3-teal" ><strong>Added By: </strong></td><td style="padding-left: 6%""><%#= @role.user.surname %></td></tr> -->
+				 <% if @role.active_status == true %>  
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%"> Active </td></tr>
+		      		
+		      	 <%elsif @role.active_status == false %>
+		      		<tr><td class="w3-teal"><strong>Status: </strong></td><td style="padding-left: 6%; color: red">Inactive</td></tr>
+		         <%end%>	
+			</table>
+              
+           </div>
+        <br>
+      <footer class="w3-container">
+        <%= link_to 'Back', roles_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+      <br />
+      </footer>
+      <br />
+    </div>
+    <br />
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 3000);
+  });
+</script>

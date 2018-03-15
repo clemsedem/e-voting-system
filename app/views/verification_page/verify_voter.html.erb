@@ -1,0 +1,66 @@
+<div class="col-md-2 col-sm-12"></div>
+<div class="col-md-8 col-sm-12">
+	
+	<br />
+   <h2 style="color: #00000a" id="tit11"><b>Voter Verification and Passcode Generation</b></h2>
+   <div class="col-md-2 col-sm-12"></div>
+   <div class="col-md-8 col-sm-12" style="margin-top: 20%">
+   	
+   	<img src="/assets/verify-icon1.png" class="img-rounded" style="margin-top: -50%; color: blue" width="100px" id="book"/>
+   	<br />
+   	
+   	<img src="/assets/spinner.gif" class="hidden loader" style="margin-top: -20%">
+   		
+   		<% if flash[:notice] %>
+           <p class="alert alert-danger" id = 'notes' style = "margin-top: -10%; font-weight: bold"><%= notice %></p>
+       		<br />
+       <% end %>
+       
+       <!-- <%if @voter.nil? %>
+           <p class="pull-right" style="margin-top: -5%"><b>A valid voter?</b>  <%= link_to "Add", new_add_voter_reason_path, class: "w3-btn w3-light-blue w3-small w3-card" %></p>
+       <%end%> -->
+      
+           
+    	<% if @user_token %>
+	   		<h5 id="voter_id_display2" style="margin-top: -5%"><b> Voter Name:</b>  <span style="font-weight: bold; color: red;%"><%= @voter.surname %> <%= @voter.other_names %></span></h5> 
+	    	<h5 id="voter_id_display" style="margin-top: %"><b> Voter ID:</b>  <span style="font-weight: bold; color: red;%"><%= @real_voter_id %></span></h5> 
+	    	<h5 id="voter_id_display1" ><b> Voter Passcode:</b>  <span style="font-weight: bold; color: red "><%= @user_token %></span></h5> 
+    	<%end%>
+    	
+   	  <%= form_tag verify_voter_path, method: :get,  input_html:{display:"block"} do %>
+		   <input id="voter_id" class="w3-input w3-border w3-round form-control w3-white"  name="voter_id"  placeholder="Enter Voter ID" style="font-size: 25px" required=""/>    
+		   <br />
+		   <input type="submit" id="search-field2" class="w3-button w3-blue w3-round-xxlarge w3-hover-blue " value="Verify"  />
+		  
+     <%end%>
+   </div>
+   <div class="col-md-2 col-sm-12"></div>
+   
+</div>
+
+<div class="col-md-2 col-sm-12"></div>
+ 
+
+<script type="text/javascript">
+	$("#search-field2").click(function(){
+	 voter_id = document.getElementById('voter_id').value;
+	 // alert(voter_id)
+	if(voter_id != null && voter_id != ""){
+		$(".loader").removeClass("hidden");
+	};
+			
+	});
+	
+	
+	$("#search-field2").click(function(){
+		$("#notes").addClass("hidden");
+		
+		  $("#voter_id_display").addClass("hidden");
+		  $("#voter_id_display1").addClass("hidden");
+		  $("#voter_id_display2").addClass("hidden");
+
+				
+	});
+	
+</script>
+

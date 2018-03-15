@@ -1,0 +1,68 @@
+<div class="col-md-2 col-sm-12"></div>
+<div class="col-md-8 col-sm-12" id="verify">	
+	<!-- <% if flash[:notice] %>
+       <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+   <% end %> -->
+   <br />
+   <h2 style="color: #00000a; margin-bottom: " id="tit11"><b>Voter Verification and Passcode Generation</b></h2>
+   <!-- <img src="/assets/verify-icon1.png" class="img-rounded w3-border" style="margin-top: %" width="50px"/> -->
+   <div class="col-md-2 col-sm-12"></div> 
+   <div class="col-md-8 col-sm-12" style="margin-top: 20%">
+   	<img src="/assets/verify-icon1.png" class="img-rounded" style="margin-top: -50%; color: blue" width="100px" id="book"/>
+   	<br /><!-- <br /><br /><br /> -->
+   	
+   	<img src="/assets/spinner.gif" class="hidden loader" style="margin-top: -20%">
+   
+    	<!-- <% if flash[:notice] %> 
+		   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+		 <% end %>
+		  -->  
+		 
+   	  <%= form_tag verify_voter_path, method: :get, input_html:{display:"block"} do %>
+		   <input id="voter_id" class="w3-input w3-border w3-round form-control w3-white"  name="voter_id"  placeholder="Enter Voter ID" style="font-size: 25px" required=""/>    
+		   <br />
+		   <input type="submit" id="search-field2" class="w3-button w3-blue w3-round-xxlarge w3-hover-blue " value="Verify"  />
+		  
+     <%end%>
+   </div>
+   <div class="col-md-2 col-sm-12"></div>
+   
+</div>
+
+<div class="col-md-2 col-sm-12"></div>
+ 
+
+<script type="text/javascript">
+	$("#search-field2").click(function(){
+	 voter_id = document.getElementById('voter_id').value;
+	 // alert(voter_id)
+	if(voter_id != null && voter_id != ""){
+		$(".loader").removeClass("hidden");
+	}
+		
+	});
+	
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	 $('#search-field2').click(function() {
+           // console.log('works on change');
+            $.ajax({
+                url: '<%= verify_voter_path %>',
+                data: {
+                    voter_id : $('#voter_id').val()
+                },
+                dataType: "script"
+            });
+        });
+
+	
+	
+})	;
+	
+	
+	
+</script>
+
+

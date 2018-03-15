@@ -1,5 +1,5 @@
 <br>
-<%= simple_form_for(@registered_voter) do |f| %>
+<%= simple_form_for(@role) do |f| %>
   <%= f.error_notification %>
 
 <div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
@@ -12,28 +12,22 @@
 		  	
     	</div>	   
       <header class="w3-container">  
-        <h4>Add a Role</h4>  
+        <h4>Add a Voter</h4>  
       </header>          
            <div class="w3-container" > 				 		      	
               
                <div class="form-inputs">
-	                <%= f.input :voter_id %>
-				    <%= f.input :surname %>
-				    <%= f.input :other_names %>
-				    <%= f.input :level_id, collection: LevelMaster.all, label_method: :level, value_method: :id %>
-				    <%= f.input :session_id, collection: SessionMaster.all, label_method: :session, value_method: :id %>
-				    <%= f.input :program_id, collection: ProgramMaster.all, label_method: :program_name, value_method: :id %>
-				    <%= f.input :gender, collection: ['Male', 'Female'] %>
-				    <%= f.input :vote_status, as: :hidden, input_html: {value: 0} %>
-				    <%= f.input :user_id, as: :hidden %>
+
+	                <%= f.input :name %>
+				    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
 				    <%= f.input :active_status, as: :hidden, input_html: {value: 1} %>
 				    <%= f.input :del_status, as: :hidden, input_html: {value: 0} %>
                </div>
            </div>
         <br>
       <footer class="w3-container">
-       	<%= f.button :submit, class: "w3-button w3-teal w3-hover-teal w3-right w3-card-4 w3-small w3-round-xlarge", value: "Add" %>
-        <%= link_to 'Back', registered_voters_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+       	<%= f.button :submit, class: "w3-button w3-teal w3-hover-teal w3-right w3-card-4 w3-small w3-round-xlarge", value: "Update" %>
+        <%= link_to 'Back', roles_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
       <br />
       </footer>
       <% end %>
@@ -49,5 +43,4 @@ $(document).ready(function(){
   }, 3000);
   });
 </script>
-
 

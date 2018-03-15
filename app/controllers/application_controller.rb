@@ -26,5 +26,14 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.permit(:sign_in, keys: [:username, :login, :password, :role_id,:creator_id,:remember_me])
       devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :current_password,:user_type_id,:entity_master_id,:creator_id])
    end
+   
+    def after_sign_in_path_for(resource)
+      if resource.role.name == 'Super Admin' 
+        # or resource.role.name == 'Super Admin'
+        root_path
+      elsif resource.role.name == 'Verification Officer'
+        verification_page_path
+      end
+  end
   
 end

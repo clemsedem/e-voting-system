@@ -14,17 +14,30 @@
     <!-- </header>  -->
    
    <% if user_signed_in? %> 
-      <body >
-	    <header>
-	      <%= render 'layouts/navigation' %>
-	    </header>
-   
-	    <div class="container-fluid" id="main" onclick="w3_close()" >
-		      <!-- <%= render 'layouts/messages' %> -->
-		      <%= yield %>
-	    </div>
-    </body>
+      <% if current_user.role.name == 'Super Admin'%>
+	      <body >
+		    <header>
+		      <%= render 'layouts/navigation' %>
+		    </header>
+	   
+		    <div class="container-fluid" id="main" onclick="w3_close()" >
+			      <!-- <%= render 'layouts/messages' %> -->
+			      <%= yield %>
+		    </div>
+	      </body>
     
+      <%elsif current_user.role.name == 'Verification Officer' %>
+		    <body id="verify-page">
+			    <header>
+			      <%= render 'layouts/navigation' %>
+			    </header>
+			    
+			    <div style="text-align: center" id="index-page">
+		    	  <%= yield %>
+		    	</div>
+		    </body>
+    
+       <%end%>
     
    <%else%>
    

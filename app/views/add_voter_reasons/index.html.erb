@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Add Voter Reasons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Reason</th>
+      <th>User</th>
+      <th>Voter</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @add_voter_reasons.each do |add_voter_reason| %>
+      <tr>
+        <td><%= add_voter_reason.reason %></td>
+        <td><%= add_voter_reason.user_id %></td>
+        <td><%= add_voter_reason.voter_id %></td>
+        <td><%= link_to 'Show', add_voter_reason %></td>
+        <td><%= link_to 'Edit', edit_add_voter_reason_path(add_voter_reason) %></td>
+        <td><%= link_to 'Destroy', add_voter_reason, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Add voter reason', new_add_voter_reason_path %>

@@ -2,6 +2,7 @@
 <div style="margin-top: 8%; background-color: " >	
 	<div class="login-form w3-card-4">
 		<%= render 'layouts/messages' %><br />
+
 		<h4 style="color: black">Sign In</h4> 
 		<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 		  <div class="form-inputs">

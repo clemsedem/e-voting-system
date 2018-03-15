@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @add_voter_reason.reason %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @add_voter_reason.user_id %>
+</p>
+
+<p>
+  <strong>Voter:</strong>
+  <%= @add_voter_reason.voter_id %>
+</p>
+
+<%= link_to 'Edit', edit_add_voter_reason_path(@add_voter_reason) %> |
+<%= link_to 'Back', add_voter_reasons_path %>

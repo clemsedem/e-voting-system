@@ -1,0 +1,47 @@
+<br>
+<%= simple_form_for(@add_voter_reason) do |f| %>
+  <%= f.error_notification %>
+
+<div id="id01" class="w3-modal w3-card-4 w3-round-large" style="display: block;">
+    <div class="w3-modal-content w3-animate-top w3-card-4 w3-light-gray" style="width: 33%; max-height: 80%; overflow-y: auto;">
+    	<div style="max-width: 70%; text-align: center; margin-left: 15%; margin-top: 15px">
+      
+	    	<% if flash[:notice] %>
+                <p class="flash_notice " id = 'notes' style = ""><%= notice %></p>
+		  	 <% end %>
+		  	
+    	</div>	   
+      <header class="w3-container">  
+        <h6 style="margin-top: -5px">Note: All fields are Required!</h6> 
+      </header>  
+      <br />        
+           <div class="w3-container" > 				 		      	
+              
+               <div class="form-inputs">
+                	<b style="color: red"><%= f.label :reason, 'Why do you want to add this voter?' %></b>
+	                <%= f.text_area :reason, rows: 5, style: "width: 100%", placeholder: "Briefly Explain why you want to add the voter", input_html: {required: true}  %>
+				    <%= f.input :user_id, as: :hidden, input_html: {value: current_user.id} %>
+				    <br />
+				    <b style="color: red"><%= f.label :voter_id, 'Enter Voter ID', input_html: {required: true} %></b>
+				    <%= f.input :voter_id, label: false, input_html: {required: true} %>
+               </div>
+           </div>
+        <br>
+      <footer class="w3-container">
+       	<%= f.button :submit, class: "w3-button w3-teal w3-hover-teal w3-right w3-card-4 w3-small w3-round-xlarge", value: "Submit" %>
+        <%= link_to 'Back', verification_page_path, class: "w3-button w3-black w3-hover-black w3-left w3-card-4 w3-small w3-round-xlarge" %>
+      <br />
+      </footer>
+      <% end %>
+      <br />
+    </div>
+    <br />
+</div> 
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 3000);
+  });
+</script>
