@@ -1,5 +1,6 @@
 class RegisteredVotersController < ApplicationController
   before_action :set_registered_voter, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /registered_voters
   # GET /registered_voters.json

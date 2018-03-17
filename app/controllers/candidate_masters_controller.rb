@@ -1,5 +1,6 @@
 class CandidateMastersController < ApplicationController
   before_action :set_candidate_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /candidate_masters
   # GET /candidate_masters.json

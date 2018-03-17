@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_filter :set_cache_headers
   protect_from_forgery with: :exception
   
@@ -29,8 +29,7 @@ class ApplicationController < ActionController::Base
    
     def after_sign_in_path_for(resource)
       if resource.role.name == 'Super Admin' 
-        # or resource.role.name == 'Super Admin'
-        root_path
+        admin_home_path
       elsif resource.role.name == 'Verification Officer'
         verification_page_path
       end

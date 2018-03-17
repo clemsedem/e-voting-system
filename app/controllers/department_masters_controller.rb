@@ -1,5 +1,6 @@
 class DepartmentMastersController < ApplicationController
   before_action :set_department_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /department_masters
   # GET /department_masters.json

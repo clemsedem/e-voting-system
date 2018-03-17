@@ -1,0 +1,41 @@
+<div class="row">
+	<div class="col-md-2 col-sm-12"></div>
+	<div class="col-md-8 col-sm-12" style="margin-top: %">
+		<br />
+         <h2 style="color: #00000a; margin-bottom: ; text-align: center" ><b>Voter Authentication and Validation</b></h2>
+		
+		  <div class="col-md-2 col-sm-12"></div> 
+		   <div class="col-md-8 col-sm-12" style="margin-top: 20%">
+				<img src="/assets/spinner.gif" class="hidden loader" style="margin-top: -20%"> 
+		   
+		   	  <%= form_tag verify_voter_path, method: :get, input_html:{display:"block"} do %>
+				   <input id="voter_id" class="w3-input w3-border w3-round form-control w3-white"  name="voter_id"  placeholder="Enter Voter ID" style="font-size: 25px" required=""/>    
+				   <br />
+				   <input id="voter_token" class="w3-input w3-border w3-round form-control w3-white"  name="voter_token"  placeholder="Enter Code" style="font-size: 25px" required=""/>    
+				   <br />
+				   <input type="submit" id="search-field2" class="w3-button w3-blue w3-hover-blue form-control w3-input" value="Submit" />
+				  
+				   			  
+		     <%end%>
+		   </div>
+		   <div class="col-md-2 col-sm-12"></div>
+   
+	</div>
+	<div class="col-md-2 col-sm-12"></div>
+</div>
+
+
+<script type="text/javascript">
+	$("#search-field2").click(function(){
+	 voter_id = document.getElementById('voter_id').value;
+	  alert(voter_id)
+	if(voter_id != null && voter_id != ""){
+		$(".loader").removeClass("hidden");
+	}
+		
+	});
+	
+</script>
+
+
+

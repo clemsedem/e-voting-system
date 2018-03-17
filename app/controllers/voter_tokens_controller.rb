@@ -1,5 +1,6 @@
 class VoterTokensController < ApplicationController
   before_action :set_voter_token, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /voter_tokens
   # GET /voter_tokens.json

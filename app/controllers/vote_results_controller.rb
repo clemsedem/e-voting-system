@@ -1,5 +1,6 @@
 class VoteResultsController < ApplicationController
   before_action :set_vote_result, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /vote_results
   # GET /vote_results.json

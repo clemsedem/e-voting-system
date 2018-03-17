@@ -1,5 +1,6 @@
 class PortfolioMastersController < ApplicationController
   before_action :set_portfolio_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /portfolio_masters
   # GET /portfolio_masters.json

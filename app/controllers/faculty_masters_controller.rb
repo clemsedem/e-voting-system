@@ -1,5 +1,6 @@
 class FacultyMastersController < ApplicationController
   before_action :set_faculty_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /faculty_masters
   # GET /faculty_masters.json

@@ -1,5 +1,6 @@
 class ProgramMastersController < ApplicationController
   before_action :set_program_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /program_masters
   # GET /program_masters.json

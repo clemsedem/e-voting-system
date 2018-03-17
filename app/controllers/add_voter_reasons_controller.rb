@@ -1,6 +1,6 @@
 class AddVoterReasonsController < ApplicationController
   before_action :set_add_voter_reason, only: [:show, :edit, :update, :destroy]
-
+  before_action :authenticate_user!
   # GET /add_voter_reasons
   # GET /add_voter_reasons.json
   def index

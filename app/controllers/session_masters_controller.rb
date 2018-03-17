@@ -1,5 +1,6 @@
 class SessionMastersController < ApplicationController
   before_action :set_session_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /session_masters
   # GET /session_masters.json

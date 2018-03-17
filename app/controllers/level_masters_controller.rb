@@ -1,5 +1,6 @@
 class LevelMastersController < ApplicationController
   before_action :set_level_master, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /level_masters
   # GET /level_masters.json

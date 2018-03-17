@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+
+  # get 'welcome/index'
+
   resources :add_voter_reasons
   # get 'verification_page/index'
 
@@ -17,7 +21,14 @@ Rails.application.routes.draw do
   resources :session_masters
   resources :level_masters
   
- root to: 'home#index'
+ # root to: 'home#index'
+ root to: 'welcome#welcome'
+ 
+ # admin home page
+ get '/home/index' => 'home#index', :as => 'admin_home'
+ 
+ # voter home page
+ get 'vote_cast_page/voter_valid' => 'vote_cast_page#voter_valid', :as => 'voter_page'
  
  # verification page
   get '/verification_page/index' => 'verification_page#index', :as => 'verification_page'
