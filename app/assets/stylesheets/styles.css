@@ -92,6 +92,12 @@ h4{
 #welcome{
 	background-image: url('/assets/body-bg1.jpg');
 }
+
+
+#voter_valid{
+	/*background-color: blue;*/
+	background-image: url('/assets/white-bg1.jpg');
+}
  
  
  /*Login*/

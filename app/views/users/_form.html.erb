@@ -21,12 +21,12 @@
                     <%= f.input :other_names, required: true, autofocus: true %>
                     <%= f.input :username, required: true, autofocus: true %>
                     <%= f.input :role_id, collection: Role.all, label_method: :name, value_method: :id  %>
-	                <%#= f.input :email, required: true, autofocus: true %>
+	                <!-- <%#= f.input :email, required: true, autofocus: true %> -->
 				    <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
 				    <%= f.input :password_confirmation, required: true %>
-				    <!-- <%#= f.input :user_id, as: :hidden %>
-				    <%#= f.input :active_status, as: :hidden, input_html: {value: 1} %>
-				    <%#= f.input :del_status, as: :hidden, input_html: {value: 0} %> -->
+				    <!-- <%#= f.input :user_id, as: :hidden %> -->
+				    <%= f.input :active_status, as: :hidden, input_html: {value: 1} %>
+				    <%= f.input :del_status, as: :hidden, input_html: {value: 0} %>
                </div>
            </div>
         <br>

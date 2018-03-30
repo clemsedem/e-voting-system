@@ -1,8 +1,18 @@
+<% if current_user %>
+     <script type="text/javascript">
+        window.location.href="/home/index"  // put your correct path in a string here
+     </script>
+     
+  <!-- <p class="alert alert-danger"> <%= flash[:danger] = "Sorry, you are not permitted to access the requested page!"%></p> -->
+<%end%>
 <br />
 <div class="container-fluid">
 	<div class="col-md-2 col-sm-12"></div>	
 	
 	<div class="col-md-8 col-sm-12" >	
+		<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>
 	   <h4 style="font-family: tahoma; font-weight: bolder; font-size: 34px" >Welcome to SedyWeb Electronic Voting System </h4>   
 	    <div class="row">
 		    <div class="col-md-4 col-sm-12">  </div>

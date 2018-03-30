@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  
+
   # get 'welcome/index'
 
   resources :add_voter_reasons
@@ -35,6 +37,13 @@ Rails.application.routes.draw do
   
   # verify voter
   get 'verify_voter'   =>  'verification_page#verify_voter'
+  
+   # validate voter
+  get 'validate_voter'   =>  'vote_cast_page#validate_voter'
+  
+  # vote pages
+ 
+  get 'vote_page/president' => 'vote_page#president', :as => 'president_page'
   
  
  
@@ -95,6 +104,7 @@ Rails.application.routes.draw do
  get       'disable_role'   =>  'roles#disable_role'
  
  
+ post 'submit_vote_result' => 'vote_page#submit_vote_result'
  
  
   

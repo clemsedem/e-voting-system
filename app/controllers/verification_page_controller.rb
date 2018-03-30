@@ -4,7 +4,7 @@ class VerificationPageController < ApplicationController
   end
   
   
-  def verify_voter
+   def verify_voter
     
     @voter_id = params[:voter_id].strip
     logger.info "This is the voter id #{@voter_id.inspect}"

@@ -12,7 +12,6 @@
     <!-- <header> -->
       <!-- <%#= render 'layouts/navigation' %> -->
     <!-- </header>  -->
-   
    <% if user_signed_in? %> 
 	      <% if current_user.role.name == 'Super Admin'%>
 		      <body >
@@ -36,29 +35,37 @@
 			    	  <%= yield %>
 			    	</div>
 			    </body>
-	    
+			    
 	      <%end%> 
+	      
   <% elsif params[:action] == 'welcome' %>
-    <body style="background: " id="welcome">
-    	 <%= yield %>
-    </body>
+	    <body style="background: " id="welcome">
+	    	 <%= yield %>
+	    </body>
     
     
- <% elsif params[:action] == 'voter_valid'%>
+ <% elsif (params[:action] == 'voter_valid' or params[:action] == 'validate_voter') %>
      <body style="background: " id="voter_valid">
      	<div class="container">
      		<%= yield %>
      	</div>
     	 
     </body>
+    
+  <% elsif (params[:action] == 'president') %>
+  	<body style="background: " id="voter_valid">
+     	<div class="container">
+     		<%= yield %>
+     	</div>
+    	 
+    </body>
  
-  <%else%>
-   
+  <% else %>  
 	<body style="background: " id="login-page">
     	 <%= yield %>
     </body>
    <%end%>  
-   
+
  
 </html>
 

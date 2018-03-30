@@ -1,0 +1,57 @@
+<br /><br /><br />
+<div class="w3-clear clearfix"></div>
+<div class="container" id = "page-container" >
+<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>	
+<h4 style="font-size: 28px">Presidential Elections</h4>
+<p style="text-align: center; font-weight: bold; font-size: 14px; color: red">Please click on the thumbprint to vote</p>
+<div class="table-responsive" >
+	 <table class="w3-table table w3-card " style="background: #7978754f"> 
+	 	<thead>
+	    <tr class="">
+	      <th></th>
+	      <th></th>
+	      <th></th>     	  
+	    </tr> 
+	  </thead>
+	   <tbody>
+	 	<% @presidential_candidates.each do |candidate| %>
+	 		<tr >
+	 			<td>
+	 				<% if candidate.image.present?%>
+		      		  <%= image_tag candidate.image.url(:thumb), class: "img-circle ", style: "width: 100px;  margin: 2px" %>	      		  
+		      		<%else%>
+		      		  <%= image_tag ('user.png'), class: "img-circle", style: "width: 100px;  margin: 2px" %> 
+		      		<%end%>
+	 			</td>
+	 			<td ><h4 ><%= candidate.registered_voter.surname %> <%= candidate.registered_voter.other_names %></h4></td>
+	 			<td>
+	 				<%= link_to submit_vote_result_path(:portfolio => candidate.portfolio_master.ref_id, :voter => @voter_token, :me => candidate.registered_voter.voter_id ), method: :post, data: { confirm: 'Are you sure you want to vote for the selected candidate? Action not reversible!!' } do %>
+					   <%= image_tag "thumb1edit.png", class: "img-responsive w3-right", style: "width: 150px" %> 
+					<% end %>
+	 			</td>
+	 				<!-- <h4 ><%= candidate.registered_voter.voter_id %> <%= candidate.portfolio_master.ref_id %> <%= @voter_id%></h4> -->
+	 		</tr>              	 	
+	 	<%end%>   
+       </tbody>  
+	</table>
+</div>
+<br> 
+<%= will_paginate @presidential_candidates,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "vote_page", :action => "president", count: params[:count], page: params[:page] }  %>
+ 
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 4000);
+ });
+ 
+</script>
+
+
+
+

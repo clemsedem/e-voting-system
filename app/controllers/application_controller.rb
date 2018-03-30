@@ -5,11 +5,8 @@ class ApplicationController < ActionController::Base
   # before_action :authenticate_user!
   before_filter :set_cache_headers
   protect_from_forgery with: :exception
-  
+ 
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  
-  
-  
   
   
   
@@ -33,6 +30,8 @@ class ApplicationController < ActionController::Base
       elsif resource.role.name == 'Verification Officer'
         verification_page_path
       end
-  end
+   end
+   
+   
   
 end

@@ -1,13 +1,17 @@
 <div class="col-md-2 col-sm-12"></div>
-<div class="col-md-8 col-sm-12" >
+<div class="col-md-8 col-sm-12" id = "my-vote">
 		<br />
          <h2 style="color: #00000a; margin-bottom: ; text-align: center" ><b>Voter Authentication and Validation</b></h2>
 		   <div class="col-md-2 col-sm-12"></div>
 		   <div class="col-md-8 col-sm-12" style="margin-top: 15%">      		
 		   	   <!-- <img src="/assets/vote.png" class="img-rounded img-responsive" style="margin-top: %; color: blue" width="100px" />
                <br /> -->
+               <% if flash[:notice] %>
+		           <p class="alert alert-danger" id = 'notes' style = "margin-top: -10%; font-weight: bold"><%= notice %></p>
+		       		<br />
+		       <% end %>
 	
-		   	  <%= form_tag validate_voter_path, method: :get,  input_html:{display:"block"} do %>
+		   	  <%= form_tag validate_voter_path, method: :get, input_html:{display:"block"} do %>
 				   <input id="voter_id" class="w3-input w3-border w3-round form-control w3-white"  name="voter_id"  placeholder="Enter Voter ID" style="font-size: 25px" required=""/>    
 				   <br />
 				   <input id="voter_token" type="password" class="w3-input w3-border w3-round form-control w3-white"  name="voter_token"  placeholder="Enter Code" style="font-size: 25px" required=""/>    
@@ -15,9 +19,9 @@
 				   <input type="submit" id="search-field2" class="w3-button w3-blue w3-hover-blue form-control w3-input" value="Submit" />
 				  				   			  
 		     <%end%>
-		   </div> 
+		   </div>
 		   <div class="col-md-2 col-sm-12"></div>
-    
+   
 </div>
 <div class="col-md-2 col-sm-12"></div>
 
@@ -25,33 +29,11 @@
 	$("#search-field2").click(function(){
 	 voter_id = document.getElementById('voter_id').value;
 	 voter_token = document.getElementById('voter_token').value;
-	    // alert(voter_token)
+	   // alert(voter_token)
 	if(voter_id != null && voter_id != "" && voter_token != null && voter_token != ""){
 		$(".loader").removeClass("hidden");
-	};
-	
+	}
 		
 	});
 	
-</script>
-
-<script type="text/javascript">
-$(document).ready(function(){
-	 $('#search-field2').click(function() {
-            console.log('works on change');
-            // alert('clicked');
-             $.ajax({
-                url: '<%= validate_voter_path %>',
-                data: {
-                    voter_id : $('#voter_id').val()
-                   
-                },
-                dataType: "script"
-            });
-           
-        });
-
-	
-	
-});
 </script>
