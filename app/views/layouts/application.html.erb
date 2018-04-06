@@ -52,7 +52,7 @@
     	 
     </body>
     
-  <% elsif (params[:action] == 'president') %>
+  <% elsif (params[:action] == 'president') or (params[:action] == 'secretary') or (params[:action] == 'treasurer') or (params[:action] == 'finacial_secretary') or (params[:action] == 'wocom') %>
   	<body style="background: " id="voter_valid">
      	<div class="container">
      		<%= yield %>

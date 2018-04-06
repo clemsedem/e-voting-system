@@ -1,11 +1,12 @@
 class VerificationPageController < ApplicationController
   before_action :authenticate_user!
+  
   def index
+    
   end
   
   
-   def verify_voter
-    
+def verify_voter    
     @voter_id = params[:voter_id].strip
     logger.info "This is the voter id #{@voter_id.inspect}"
 
@@ -39,8 +40,10 @@ class VerificationPageController < ApplicationController
             del_status: false
           )
           
-          token.save!
-          
+           if token.save
+             flash.now[:notice] = "Please copy the Voter ID and code "
+           end
+       
       end
       
       

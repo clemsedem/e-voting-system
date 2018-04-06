@@ -16,12 +16,7 @@
        		<br />
        <% end %>
        
-       <!-- <%if @voter.nil? %>
-           <p class="pull-right" style="margin-top: -5%"><b>A valid voter?</b>  <%= link_to "Add", new_add_voter_reason_path, class: "w3-btn w3-light-blue w3-small w3-card" %></p>
-       <%end%> -->
-      
-           
-    	<% if @user_token %>
+    	<% if @user_token && @encrypted_token %>
 	   		<h5 id="voter_id_display2" style="margin-top: -5%"><b> Voter Name:</b>  <span style="font-weight: bold; color: red;%"><%= @voter.surname %> <%= @voter.other_names %></span></h5> 
 	    	<h5 id="voter_id_display" style="margin-top: %"><b> Voter ID:</b>  <span style="font-weight: bold; color: red;%"><%= @real_voter_id %></span></h5> 
 	    	<h5 id="voter_id_display1" ><b> Voter Passcode:</b>  <span style="font-weight: bold; color: red "><%= @user_token %></span></h5> 
@@ -30,8 +25,7 @@
    	  <%= form_tag verify_voter_path, method: :get,  input_html:{display:"block"} do %>
 		   <input id="voter_id" class="w3-input w3-border w3-round form-control w3-white"  name="voter_id"  placeholder="Enter Voter ID" style="font-size: 25px" required=""/>    
 		   <br />
-		   <input type="submit" id="search-field2" class="w3-button w3-blue w3-round-xxlarge w3-hover-blue " value="Verify"  />
-		  
+		   <input type="submit" id="search-field2" class="w3-button w3-blue w3-round-xxlarge w3-hover-blue " value="Verify"  />		  
      <%end%>
    </div>
    <div class="col-md-2 col-sm-12"></div>

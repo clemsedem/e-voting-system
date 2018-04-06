@@ -31,7 +31,7 @@ class VoteCastPageController < ApplicationController
            elsif @voter.nil?
              flash.now[:notice] = "Sorry the voter does not exists!" 
            else
-             flash.now[:notice] = "Good to go!!!"
+             # flash.now[:notice] = "Good to go!!!"
             
             respond_to do |format|
               format.html { redirect_to president_page_path(:% => @encrypted_token) }

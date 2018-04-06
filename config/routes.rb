@@ -44,10 +44,12 @@ Rails.application.routes.draw do
   # vote pages
  
   get 'vote_page/president' => 'vote_page#president', :as => 'president_page'
+  get 'vote_page/secretary' => 'vote_page#secretary', :as => 'secretary_page'
+  get 'vote_page/treasurer' => 'vote_page#treasurer', :as => 'treasurer_page'
+  get 'vote_page/finacial_secretary' => 'vote_page#finacial_secretary', :as => 'finacial_secretary_page'
+  get 'vote_page/wocom' => 'vote_page#wocom', :as => 'wocom_page' 
   
- 
- 
- 
+  
  devise_scope :user do
     get '/users/sign_up' => 'users#sign_in'
   end

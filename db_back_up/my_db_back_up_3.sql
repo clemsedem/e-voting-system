@@ -35,6 +35,43 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: add_voter_reasons; Type: TABLE; Schema: public; Owner: clemence
+--
+
+CREATE TABLE add_voter_reasons (
+    id integer NOT NULL,
+    reason character varying,
+    user_id character varying,
+    voter_id character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE add_voter_reasons OWNER TO clemence;
+
+--
+-- Name: add_voter_reasons_id_seq; Type: SEQUENCE; Schema: public; Owner: clemence
+--
+
+CREATE SEQUENCE add_voter_reasons_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE add_voter_reasons_id_seq OWNER TO clemence;
+
+--
+-- Name: add_voter_reasons_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: clemence
+--
+
+ALTER SEQUENCE add_voter_reasons_id_seq OWNED BY add_voter_reasons.id;
+
+
+--
 -- Name: candidate_masters; Type: TABLE; Schema: public; Owner: clemence
 --
 
@@ -232,6 +269,51 @@ ALTER SEQUENCE level_masters_id_seq OWNED BY level_masters.id;
 
 
 --
+-- Name: models; Type: TABLE; Schema: public; Owner: clemence
+--
+
+CREATE TABLE models (
+    id integer NOT NULL,
+    email character varying DEFAULT ''::character varying NOT NULL,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    "user" character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE models OWNER TO clemence;
+
+--
+-- Name: models_id_seq; Type: SEQUENCE; Schema: public; Owner: clemence
+--
+
+CREATE SEQUENCE models_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE models_id_seq OWNER TO clemence;
+
+--
+-- Name: models_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: clemence
+--
+
+ALTER SEQUENCE models_id_seq OWNED BY models.id;
+
+
+--
 -- Name: portfolio_masters; Type: TABLE; Schema: public; Owner: clemence
 --
 
@@ -355,6 +437,44 @@ ALTER SEQUENCE registered_voters_id_seq OWNED BY registered_voters.id;
 
 
 --
+-- Name: roles; Type: TABLE; Schema: public; Owner: clemence
+--
+
+CREATE TABLE roles (
+    id integer NOT NULL,
+    name character varying,
+    active_status boolean,
+    del_status boolean,
+    user_id integer,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE roles OWNER TO clemence;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE; Schema: public; Owner: clemence
+--
+
+CREATE SEQUENCE roles_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE roles_id_seq OWNER TO clemence;
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: clemence
+--
+
+ALTER SEQUENCE roles_id_seq OWNED BY roles.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: clemence
 --
 
@@ -401,6 +521,56 @@ ALTER TABLE session_masters_id_seq OWNER TO clemence;
 --
 
 ALTER SEQUENCE session_masters_id_seq OWNED BY session_masters.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: clemence
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    email character varying DEFAULT ''::character varying,
+    encrypted_password character varying DEFAULT ''::character varying NOT NULL,
+    reset_password_token character varying,
+    reset_password_sent_at timestamp without time zone,
+    remember_created_at timestamp without time zone,
+    sign_in_count integer DEFAULT 0 NOT NULL,
+    current_sign_in_at timestamp without time zone,
+    last_sign_in_at timestamp without time zone,
+    current_sign_in_ip inet,
+    last_sign_in_ip inet,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    surname character varying,
+    other_names character varying,
+    username character varying,
+    active_status boolean,
+    del_status boolean,
+    role_id integer
+);
+
+
+ALTER TABLE users OWNER TO clemence;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: clemence
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE users_id_seq OWNER TO clemence;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: clemence
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
 
 
 --
@@ -483,6 +653,13 @@ ALTER SEQUENCE voter_tokens_id_seq OWNED BY voter_tokens.id;
 
 
 --
+-- Name: add_voter_reasons id; Type: DEFAULT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY add_voter_reasons ALTER COLUMN id SET DEFAULT nextval('add_voter_reasons_id_seq'::regclass);
+
+
+--
 -- Name: candidate_masters id; Type: DEFAULT; Schema: public; Owner: clemence
 --
 
@@ -518,6 +695,13 @@ ALTER TABLE ONLY level_masters ALTER COLUMN id SET DEFAULT nextval('level_master
 
 
 --
+-- Name: models id; Type: DEFAULT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY models ALTER COLUMN id SET DEFAULT nextval('models_id_seq'::regclass);
+
+
+--
 -- Name: portfolio_masters id; Type: DEFAULT; Schema: public; Owner: clemence
 --
 
@@ -539,10 +723,24 @@ ALTER TABLE ONLY registered_voters ALTER COLUMN id SET DEFAULT nextval('register
 
 
 --
+-- Name: roles id; Type: DEFAULT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY roles ALTER COLUMN id SET DEFAULT nextval('roles_id_seq'::regclass);
+
+
+--
 -- Name: session_masters id; Type: DEFAULT; Schema: public; Owner: clemence
 --
 
 ALTER TABLE ONLY session_masters ALTER COLUMN id SET DEFAULT nextval('session_masters_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
 
 
 --
@@ -560,13 +758,34 @@ ALTER TABLE ONLY voter_tokens ALTER COLUMN id SET DEFAULT nextval('voter_tokens_
 
 
 --
+-- Data for Name: add_voter_reasons; Type: TABLE DATA; Schema: public; Owner: clemence
+--
+
+COPY add_voter_reasons (id, reason, user_id, voter_id, created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: add_voter_reasons_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
+--
+
+SELECT pg_catalog.setval('add_voter_reasons_id_seq', 1, false);
+
+
+--
 -- Data for Name: candidate_masters; Type: TABLE DATA; Schema: public; Owner: clemence
 --
 
 COPY candidate_masters (id, voter_id, portfolio_id, user_id, active_status, del_status, created_at, updated_at, slot_id, image_file_name, image_content_type, image_file_size, image_updated_at) FROM stdin;
-2	10012451	FS	\N	t	f	2018-03-03 21:42:47.351663	2018-03-03 21:55:03.02035	\N	\N	\N	\N	\N
 1	10012565	P	\N	t	f	2018-03-03 20:52:22.932892	2018-03-04 10:01:31.964618	\N	image11.jpg	image/jpeg	6181	2018-03-04 00:31:04.199864
-3	10034809	S	\N	t	f	2018-03-04 00:51:54.08539	2018-03-04 11:45:27.45339	\N	\N	\N	\N	\N
+2	10012451	P	\N	t	f	2018-03-03 21:42:47.351663	2018-03-28 22:05:30.422883	\N	\N	\N	\N	\N
+3	10034809	P	\N	t	f	2018-03-04 00:51:54.08539	2018-03-28 22:05:47.666723	\N	\N	\N	\N	\N
+4	10092789	S	\N	t	f	2018-04-05 23:35:52.969816	2018-04-05 23:35:52.969816	\N	\N	\N	\N	\N
+5	10012432	S	\N	t	f	2018-04-05 23:36:17.758407	2018-04-05 23:36:17.758407	\N	\N	\N	\N	\N
+6	10034689	TR	\N	t	f	2018-04-06 00:39:15.063392	2018-04-06 00:39:15.063392	\N	\N	\N	\N	\N
+7	10034809	FS	\N	t	f	2018-04-06 08:51:13.520098	2018-04-06 08:51:13.520098	\N	\N	\N	\N	\N
+8	10092789	FS	\N	t	f	2018-04-06 08:51:28.010303	2018-04-06 08:51:28.010303	\N	\N	\N	\N	\N
+9	10092789	WC	\N	t	f	2018-04-06 09:10:42.777082	2018-04-06 09:10:42.777082	\N	\N	\N	\N	\N
 \.
 
 
@@ -574,7 +793,7 @@ COPY candidate_masters (id, voter_id, portfolio_id, user_id, active_status, del_
 -- Name: candidate_masters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
 --
 
-SELECT pg_catalog.setval('candidate_masters_id_seq', 3, true);
+SELECT pg_catalog.setval('candidate_masters_id_seq', 9, true);
 
 
 --
@@ -647,6 +866,21 @@ SELECT pg_catalog.setval('level_masters_id_seq', 4, true);
 
 
 --
+-- Data for Name: models; Type: TABLE DATA; Schema: public; Owner: clemence
+--
+
+COPY models (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, "user", created_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
+--
+
+SELECT pg_catalog.setval('models_id_seq', 1, false);
+
+
+--
 -- Data for Name: portfolio_masters; Type: TABLE DATA; Schema: public; Owner: clemence
 --
 
@@ -654,6 +888,8 @@ COPY portfolio_masters (id, ref_id, portfolio, user_id, active_status, del_statu
 2	S	Secretary	\N	t	f	2018-02-28 19:23:13.232969	2018-02-28 19:23:13.232969
 3	FS	Financial Secretary	\N	t	f	2018-02-28 19:23:30.933384	2018-02-28 19:23:30.933384
 1	P	President	\N	t	f	2018-02-28 19:22:50.351417	2018-02-28 19:29:59.866787
+4	WC	Women Commissioner	\N	t	f	2018-03-30 17:40:46.463617	2018-03-30 17:40:46.463617
+5	TR	Treasurer	\N	t	f	2018-04-05 23:18:00.441901	2018-04-05 23:18:00.441901
 \.
 
 
@@ -661,7 +897,7 @@ COPY portfolio_masters (id, ref_id, portfolio, user_id, active_status, del_statu
 -- Name: portfolio_masters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
 --
 
-SELECT pg_catalog.setval('portfolio_masters_id_seq', 3, true);
+SELECT pg_catalog.setval('portfolio_masters_id_seq', 5, true);
 
 
 --
@@ -686,9 +922,12 @@ SELECT pg_catalog.setval('program_masters_id_seq', 2, true);
 --
 
 COPY registered_voters (id, voter_id, surname, other_names, level_id, session_id, program_id, gender, vote_status, user_id, active_status, del_status, created_at, updated_at) FROM stdin;
-1	10012565	Agozi	Clemence	4	1	1	Male	f	\N	t	f	2018-03-03 18:20:13.568319	2018-03-03 18:34:21.632041
-2	10012451	Nana-Osafo	Bosompem	3	4	2	Male	f	\N	t	f	2018-03-03 18:55:30.895078	2018-03-03 19:03:31.820186
-3	10034809	Adae	Freda	2	2	1	Female	f	\N	t	f	2018-03-04 00:51:34.566302	2018-03-04 00:51:34.566302
+2	10012451	Nana-Osafo	Bosompem	3	4	2	Male	f	\N	t	f	2018-03-03 18:55:30.895078	2018-03-19 21:20:09.439645
+3	10034809	Adae	Freda	2	2	1	Female	f	\N	t	f	2018-03-04 00:51:34.566302	2018-03-19 21:20:17.348404
+4	10034689	Dadson	Samson Kwesi	4	1	1	Male	f	\N	t	f	2018-03-12 19:34:16.160699	2018-03-19 21:20:24.427196
+1	10012565	Agozi	Clemence	4	1	1	Male	f	\N	t	f	2018-03-03 18:20:13.568319	2018-03-19 21:20:35.276021
+5	10012432	Nartey	Francis	4	4	2	Male	f	\N	t	f	2018-04-05 23:34:54.569732	2018-04-05 23:34:54.569732
+6	10092789	Quaye	Clara	3	2	1	Female	f	\N	t	f	2018-04-05 23:35:24.770756	2018-04-05 23:35:24.770756
 \.
 
 
@@ -696,7 +935,25 @@ COPY registered_voters (id, voter_id, surname, other_names, level_id, session_id
 -- Name: registered_voters_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
 --
 
-SELECT pg_catalog.setval('registered_voters_id_seq', 3, true);
+SELECT pg_catalog.setval('registered_voters_id_seq', 6, true);
+
+
+--
+-- Data for Name: roles; Type: TABLE DATA; Schema: public; Owner: clemence
+--
+
+COPY roles (id, name, active_status, del_status, user_id, created_at, updated_at) FROM stdin;
+1	Super Admin	t	f	2	2018-03-11 12:16:39.487555	2018-03-11 13:38:36.644596
+2	Verification Officer	t	f	2	2018-03-11 13:13:26.115069	2018-03-12 07:47:40.732297
+4	App Admin	t	f	2	2018-03-16 14:38:06.601734	2018-03-16 14:38:06.601734
+\.
+
+
+--
+-- Name: roles_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
+--
+
+SELECT pg_catalog.setval('roles_id_seq', 4, true);
 
 
 --
@@ -720,6 +977,15 @@ COPY schema_migrations (version) FROM stdin;
 20180303162321
 20180303162830
 20180304001325
+20180304221353
+20180304222457
+20180305193940
+20180306130239
+20180306130758
+20180309171348
+20180310190450
+20180311130706
+20180315082036
 \.
 
 
@@ -728,10 +994,10 @@ COPY schema_migrations (version) FROM stdin;
 --
 
 COPY session_masters (id, session, user_id, active_status, del_status, created_at, updated_at) FROM stdin;
-1	Morning	\N	t	f	2018-03-01 17:31:35.353935	2018-03-01 17:31:56.486753
-2	Evening	\N	t	f	2018-03-03 15:56:17.167693	2018-03-03 15:56:17.167693
 3	Distance Learning	\N	t	f	2018-03-03 15:56:30.298346	2018-03-03 15:56:30.298346
 4	Weekend	\N	t	f	2018-03-03 15:56:42.68718	2018-03-03 15:56:42.68718
+2	Evening	\N	t	f	2018-03-03 15:56:17.167693	2018-03-09 17:53:48.521255
+1	Morning	\N	t	f	2018-03-01 17:31:35.353935	2018-03-11 12:25:04.673665
 \.
 
 
@@ -743,10 +1009,34 @@ SELECT pg_catalog.setval('session_masters_id_seq', 4, true);
 
 
 --
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: clemence
+--
+
+COPY users (id, email, encrypted_password, reset_password_token, reset_password_sent_at, remember_created_at, sign_in_count, current_sign_in_at, last_sign_in_at, current_sign_in_ip, last_sign_in_ip, created_at, updated_at, surname, other_names, username, active_status, del_status, role_id) FROM stdin;
+10		$2a$11$LOVj4TStGQ5Av.LDnwGPFO.B.AM67rEqiIz9vWiPGLoV4IVe6fZsy	\N	\N	\N	4	2018-04-02 12:32:53.250339	2018-03-21 13:11:27.838935	41.66.255.134	41.66.255.168	2018-03-19 10:58:28.49719	2018-04-02 12:32:53.252397	Awuah	Kojo	kojo	t	f	1
+9		$2a$11$piXdqgCr81H2ogk3GXsW9uJ1VpH6bBD/zzOdQwNlsNuUidBh6Yvzi	\N	\N	\N	31	2018-04-06 08:41:04.008777	2018-04-06 00:06:42.21401	41.189.179.106	41.66.255.98	2018-03-07 08:21:29.919628	2018-04-06 08:41:04.01202	Asamoah	David	david	t	f	2
+2		$2a$11$GZPBypydZab2k17ooj9PqOBybB0m5WNbp7n0bzc4/gXsJCQlvnIWK	\N	\N	\N	42	2018-04-06 09:10:27.72582	2018-04-06 08:50:58.836883	41.189.179.106	41.189.179.106	2018-03-06 11:58:57.768349	2018-04-06 09:10:27.728095	Agozi	Clemence	clem	t	f	1
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
+--
+
+SELECT pg_catalog.setval('users_id_seq', 10, true);
+
+
+--
 -- Data for Name: vote_results; Type: TABLE DATA; Schema: public; Owner: clemence
 --
 
 COPY vote_results (id, portfolio_id, voter_id, candidate_id, user_id, active_status, del_status, created_at, updated_at) FROM stdin;
+1	P	10012565	10012565	\N	t	f	2018-04-06 00:10:01.060705	2018-04-06 00:10:01.060705
+2	S	10012565	10092789	\N	t	f	2018-04-06 00:36:38.685321	2018-04-06 00:36:38.685321
+3	TR	10012565	10034689	\N	t	f	2018-04-06 08:52:44.701769	2018-04-06 08:52:44.701769
+4	TR	10012565	10034689	\N	t	f	2018-04-06 08:54:17.350381	2018-04-06 08:54:17.350381
+5	FS	10012565	10034809	\N	t	f	2018-04-06 09:03:30.825297	2018-04-06 09:03:30.825297
+6	FS	10012565	10034809	\N	t	f	2018-04-06 09:12:12.263895	2018-04-06 09:12:12.263895
 \.
 
 
@@ -754,7 +1044,7 @@ COPY vote_results (id, portfolio_id, voter_id, candidate_id, user_id, active_sta
 -- Name: vote_results_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
 --
 
-SELECT pg_catalog.setval('vote_results_id_seq', 1, false);
+SELECT pg_catalog.setval('vote_results_id_seq', 6, true);
 
 
 --
@@ -762,6 +1052,9 @@ SELECT pg_catalog.setval('vote_results_id_seq', 1, false);
 --
 
 COPY voter_tokens (id, voter_id, token, user_id, active_status, del_status, created_at, updated_at) FROM stdin;
+1	10012565	44b2634421ea0fb8f30ba0180130e2036b9d34c308774767f898da6a61204d07	\N	t	f	2018-04-06 00:08:18.973135	2018-04-06 00:08:18.973135
+2	10012451	24c320e960421c7dda1f02a36273cdf5b708062bc26a1ce2c2de7947a68a6b9f	\N	t	f	2018-04-06 00:08:50.425295	2018-04-06 00:08:50.425295
+3	10034809	a601b7199ff050de451975d21fc8754fa2cd84fb791864528a4af1d08c997ad5	\N	t	f	2018-04-06 00:09:06.294668	2018-04-06 00:09:06.294668
 \.
 
 
@@ -769,7 +1062,15 @@ COPY voter_tokens (id, voter_id, token, user_id, active_status, del_status, crea
 -- Name: voter_tokens_id_seq; Type: SEQUENCE SET; Schema: public; Owner: clemence
 --
 
-SELECT pg_catalog.setval('voter_tokens_id_seq', 1, false);
+SELECT pg_catalog.setval('voter_tokens_id_seq', 3, true);
+
+
+--
+-- Name: add_voter_reasons add_voter_reasons_pkey; Type: CONSTRAINT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY add_voter_reasons
+    ADD CONSTRAINT add_voter_reasons_pkey PRIMARY KEY (id);
 
 
 --
@@ -813,6 +1114,14 @@ ALTER TABLE ONLY level_masters
 
 
 --
+-- Name: models models_pkey; Type: CONSTRAINT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY models
+    ADD CONSTRAINT models_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: portfolio_masters portfolio_masters_pkey; Type: CONSTRAINT; Schema: public; Owner: clemence
 --
 
@@ -837,11 +1146,27 @@ ALTER TABLE ONLY registered_voters
 
 
 --
+-- Name: roles roles_pkey; Type: CONSTRAINT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY roles
+    ADD CONSTRAINT roles_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: session_masters session_masters_pkey; Type: CONSTRAINT; Schema: public; Owner: clemence
 --
 
 ALTER TABLE ONLY session_masters
     ADD CONSTRAINT session_masters_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: clemence
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
 
 
 --
@@ -858,6 +1183,27 @@ ALTER TABLE ONLY vote_results
 
 ALTER TABLE ONLY voter_tokens
     ADD CONSTRAINT voter_tokens_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: index_models_on_email; Type: INDEX; Schema: public; Owner: clemence
+--
+
+CREATE UNIQUE INDEX index_models_on_email ON models USING btree (email);
+
+
+--
+-- Name: index_models_on_reset_password_token; Type: INDEX; Schema: public; Owner: clemence
+--
+
+CREATE UNIQUE INDEX index_models_on_reset_password_token ON models USING btree (reset_password_token);
+
+
+--
+-- Name: index_users_on_reset_password_token; Type: INDEX; Schema: public; Owner: clemence
+--
+
+CREATE UNIQUE INDEX index_users_on_reset_password_token ON users USING btree (reset_password_token);
 
 
 --
