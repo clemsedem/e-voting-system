@@ -66,7 +66,7 @@ class VotePageController < ApplicationController
       
       @finance_votes = VoteResult.where(voter_id: @voter_id, portfolio_id: 'FS')[0]
       
-      if  @treasurer_votes.present?
+      if  @finance_votes.present?
         flash.now[:notice] = "You have already voted for Secretarial candidate!"
         redirect_to wocom_page_path(:% => @voter_token ) 
       end
@@ -77,15 +77,15 @@ class VotePageController < ApplicationController
    def wocom
       @wocom_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.ref_id =?", 'WC').paginate(:page => params[:page], :per_page => 5)
       logger.info @wocom_candidates.inspect
-       @voter_token = params[:%]
+      @voter_token = params[:%]
       logger.info @voter_token.inspect
       voter_in_token = VoterToken.where(token: @voter_token)[0]
       @voter_id = voter_in_token.voter_id   
       @portfolio_id = @wocom_candidates[0].portfolio_master.ref_id  
       
-      @wocom_candidates = VoteResult.where(voter_id: @voter_id, portfolio_id: 'WC')[0]
+      @wocom_votes = VoteResult.where(voter_id: @voter_id, portfolio_id: 'WC')[0]
       
-      if  @treasurer_votes.present?
+      if  @wocom_votes.present?
         flash.now[:notice] = "You have already voted for Secretarial candidate!"
         redirect_to root_path
       end
@@ -119,14 +119,18 @@ class VotePageController < ApplicationController
             if vote_result.save
               # vote redirect
                if @portfolio_id == 'WC'
-                  RegisteredVoter.update_attribute(
-                    vote_status: true
-                   )
-                  
-                   respond_to do |format|
-                    format.html { redirect_to root_path, notice: "Thanks for passing by!! Remember your vote is your power." }
-                 end
+                    get_voter = RegisteredVoter.where(voter_id: @voter_id)[0]
+                    logger.info "Voter that has finished voting #{get_voter.inspect}"
                  
+                    update_vote_status = get_voter.update(
+                            vote_status: true
+                       )
+                     
+                         respond_to do |format|
+                          format.html { redirect_to root_path, notice: "Thanks for passing by!! Remember your vote is your power." }
+                       end
+                    
+               
                elsif @portfolio_id == 'P'
                    respond_to do |format|
                       format.html { redirect_to secretary_page_path(:% => @voter_token) }
@@ -135,6 +139,11 @@ class VotePageController < ApplicationController
                elsif @portfolio_id == 'S'
                     respond_to do |format|
                       format.html { redirect_to treasurer_page_path(:% => @voter_token) }
+                   end
+                   
+              elsif @portfolio_id == 'TR'
+                    respond_to do |format|
+                      format.html { redirect_to finacial_secretary_page_path(:% => @voter_token) }
                    end
                    
                elsif @portfolio_id == 'FS'
