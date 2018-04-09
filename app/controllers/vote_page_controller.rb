@@ -17,6 +17,7 @@ class VotePageController < ApplicationController
         
    end
    
+   
    def secretary      
       @secretary_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =?", 'Secretary').paginate(:page => params[:page], :per_page => 5)
       logger.info @secretary_candidates.inspect
@@ -102,12 +103,42 @@ class VotePageController < ApplicationController
      voter_in_token = VoterToken.where(token: @voter_token)[0]     
      @voter_id = voter_in_token.voter_id   
      
-     if @portfolio_id && @candidate && @voter_id
+      already_voted_for_portfolio = VoteResult.where(voter_id: @voter_id, portfolio_id: @portfolio_id )[0]
+           
+            if already_voted_for_portfolio.present?
+                if already_voted_for_portfolio.portfolio_id == 'P' or already_voted_for_portfolio.portfolio_id == 'NONE'
+                    respond_to do |format|
+                        format.html { redirect_to secretary_page_path(:% => @voter_token), notice: "You have already voted for this portfolio!" }
+                     end
+                elsif already_voted_for_portfolio.portfolio_id == 'S' or already_voted_for_portfolio.portfolio_id == 'NONE'
+                     respond_to do |format|
+                        format.html { redirect_to treasurer_page_path(:% => @voter_token), notice: "You have already voted for this portfolio!" }
+                     end 
+                elsif already_voted_for_portfolio.portfolio_id == 'TR' or already_voted_for_portfolio.portfolio_id == 'NONE'
+                    respond_to do |format|
+                      format.html { redirect_to finacial_secretary_page_path(:% => @voter_token), notice: "You have already voted for this portfolio!" }
+                   end
+                 elsif already_voted_for_portfolio.portfolio_id == 'FS' or already_voted_for_portfolio.portfolio_id == 'NONE'
+                     respond_to do |format|
+                        format.html { redirect_to wocom_page_path(:% => @voter_token), notice: "You have already voted for this portfolio!" }
+                     end
+                elsif already_voted_for_portfolio.portfolio_id == 'WC' 
+                    respond_to do |format|
+                          format.html { redirect_to root_path, notice: "Thanks for passing by!! Remember your vote is your power." }
+                       end
+                end
+            # end
+            
+     
+     
+     
+     
+     elsif @portfolio_id && @candidate && @voter_id
        check_voter = RegisteredVoter.where(voter_id: @voter_id)
        
        if check_voter.present?
           check_candidate = CandidateMaster.joins(:registered_voter).where("registered_voters.voter_id =?", @candidate)
-          if check_candidate.present?
+          if check_candidate.present? or @candidate == 'NONE'           
              vote_result = VoteResult.new(
               portfolio_id: @portfolio_id,
               voter_id:  @voter_id,
@@ -115,10 +146,12 @@ class VotePageController < ApplicationController
               active_status: 1, 
               del_status: 0
              )
+             
+            
             
             if vote_result.save
               # vote redirect
-               if @portfolio_id == 'WC'
+               if @portfolio_id == 'WC' 
                     get_voter = RegisteredVoter.where(voter_id: @voter_id)[0]
                     logger.info "Voter that has finished voting #{get_voter.inspect}"
                  
@@ -131,22 +164,22 @@ class VotePageController < ApplicationController
                        end
                     
                
-               elsif @portfolio_id == 'P'
+               elsif @portfolio_id == 'P' 
                    respond_to do |format|
                       format.html { redirect_to secretary_page_path(:% => @voter_token) }
                    end
                    
-               elsif @portfolio_id == 'S'
+               elsif @portfolio_id == 'S' 
                     respond_to do |format|
                       format.html { redirect_to treasurer_page_path(:% => @voter_token) }
                    end
                    
-              elsif @portfolio_id == 'TR'
+              elsif @portfolio_id == 'TR' 
                     respond_to do |format|
                       format.html { redirect_to finacial_secretary_page_path(:% => @voter_token) }
                    end
                    
-               elsif @portfolio_id == 'FS'
+               elsif @portfolio_id == 'FS' 
                     respond_to do |format|
                       format.html { redirect_to wocom_page_path(:% => @voter_token) }
                    end

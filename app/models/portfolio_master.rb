@@ -5,6 +5,7 @@ class PortfolioMaster < ActiveRecord::Base
   before_save :titler
   
   has_many :candidates, foreign_key: :portfolio_id
+  has_many :vote_results
   
   def titler 
       str_list = self.portfolio.split

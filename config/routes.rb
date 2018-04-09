@@ -38,6 +38,10 @@ Rails.application.routes.draw do
   # verify voter
   get 'verify_voter'   =>  'verification_page#verify_voter'
   
+  # Display token
+  get 'token_show'   =>  'verification_page#token_show'
+  
+  
    # validate voter
   get 'validate_voter'   =>  'vote_cast_page#validate_voter'
   

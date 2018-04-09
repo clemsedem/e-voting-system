@@ -2,11 +2,6 @@ class VoteCastPageController < ApplicationController
   
   
   def voter_valid
-    
-    respond_to do |format| 
-      format.js 
-      format.html
-    end
   end 
   
   

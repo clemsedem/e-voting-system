@@ -1,0 +1,68 @@
+<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>	
+
+<h4>Presidential Results</h4>
+<br />
+	<p style = 'text-align: center; font-family: tahoma; font-size: 15px;'>
+  		 <b>Download:</b>  
+                      <%= link_to "CSV", all_candidate_excel_path(format: "csv"), :class => "w3-hover-white", method: :get%> 
+                     | <%= link_to "Excel", all_candidate_excel_path(format: "xls"),:class => "w3-hover-white", method: :get%>
+	</p>
+
+     <div class="clearfix"></div>
+	<br />
+
+
+
+<div class="table-responsive" id="table">
+	<table class="table table-condensed table-bordered table-striped w3-card">
+	  <thead>
+	    <tr class="w3-pale-blue">
+	      <th>S/N</th>
+	      <th>Voter</th>
+	      <th>Voter ID</th>
+	      <th>Candidate</th>
+	      <th>User</th>
+	      <th>Active status</th>
+	      <th>Del status</th>
+	      <th colspan="3"></th>
+	    </tr> 
+	  </thead>
+	
+	  <tbody>
+	    <% @presidents.each_with_index do |president, index| %>
+	      <tr>
+	      	<td><%= index+1 %></td>
+	      	<td><%#= president.candidate_master.voter_id %></td>
+	        <td>
+	        	<%= president.portfolio_master.portfolio %>
+	        </td>
+	        <td><%= president.candidate_id %></td>
+	        <td><%= president.user_id %></td>
+	        <td><%= president.active_status %></td>
+	        <td><%= president.del_status %></td>
+	        <td><%= link_to 'Show', president %></td>
+	        <td><%= link_to 'Edit', edit_vote_result_path(president) %></td>
+	        <td><%= link_to 'Destroy', president, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>
+<br>
+
+<%#= link_to '+', new_president_path, class: "w3-button w3-circle w3-light-blue w3-hover-pale-blue" %>
+<%= will_paginate @presidents,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "vote_results", :action => "index", count: params[:count], page: params[:page] }  %>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 4000);
+ });
+ 
+</script>

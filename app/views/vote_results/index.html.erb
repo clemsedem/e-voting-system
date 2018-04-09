@@ -1,37 +1,85 @@
-<p id="notice"><%= notice %></p>
+<div class="container" id = "page-container" >
+<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>	
 
-<h1>Listing Vote Results</h1>
+ <!-- <h4>Vote Results</h4> -->
+	
+			
+		<div class="w3-bar w3-black">
+		    <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'President')"><b>President</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Secretary')"><b>Secretary</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Treasurer')"><b>Treasurer</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'F_Secretary')"><b>Financial Secretary</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'WOCOM')"><b>Women Commissioner</b></button>
+		 </div>
+		
+		<div id="President" class="w3-container w3-display-container city w3-border" style="margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none' "
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br />
+		    <%= render :partial=> 'president' %>
+		</div>
+		
+		<div id="Secretary" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  <!-- <%#= render :partial=> 'regions' %> -->
+		</div>
+		
+		<div id="Treasurer" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  	<!-- <%#= render :partial=> 'cities' %> -->
+		</div>
+		
+		
+		<div id="F_Secretary" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  	<!-- <%#= render :partial=> 'suburbs' %> -->
+		</div>
+		
+		<div id="WOCOM" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  	<!-- <%#= render :partial=> 'suburbs' %> -->
+		</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Portfolio</th>
-      <th>Voter</th>
-      <th>Candidate</th>
-      <th>User</th>
-      <th>Active status</th>
-      <th>Del status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+</div>
 
-  <tbody>
-    <% @vote_results.each do |vote_result| %>
-      <tr>
-        <td><%= vote_result.portfolio_id %></td>
-        <td><%= vote_result.voter_id %></td>
-        <td><%= vote_result.candidate_id %></td>
-        <td><%= vote_result.user_id %></td>
-        <td><%= vote_result.active_status %></td>
-        <td><%= vote_result.del_status %></td>
-        <td><%= link_to 'Show', vote_result %></td>
-        <td><%= link_to 'Edit', edit_vote_result_path(vote_result) %></td>
-        <td><%= link_to 'Destroy', vote_result, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 4000);
+ });
+ 
+</script>
 
-<%= link_to 'New Vote result', new_vote_result_path %>
+
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-teal", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-teal";
+}
+</script>
+
+
+
+
+

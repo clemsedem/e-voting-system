@@ -6,6 +6,8 @@ class VoteResultsController < ApplicationController
   # GET /vote_results.json
   def index
     @vote_results = VoteResult.all
+    @presidents = VoteResult.where(portfolio_id: 'P').paginate(:page => params[:page], :per_page => 5)
+    logger.info "Presidents #{@presidents.inspect}"
   end
 
   # GET /vote_results/1

@@ -1,10 +1,12 @@
 class VerificationPageController < ApplicationController
   before_action :authenticate_user!
   
-  def index
-    
+  def index   
   end
   
+  def token_show
+    
+  end
   
 def verify_voter    
     @voter_id = params[:voter_id].strip
@@ -33,15 +35,16 @@ def verify_voter
       if @user_token && @encrypted_token
           # flash.now[:notice] = "Sure!!"
           logger.info "Now insert into the token table"
-        token = VoterToken.new(
+        @token = VoterToken.new(
             voter_id: @real_voter_id,
             token: @encrypted_token,
             active_status: true,
             del_status: false
           )
           
-           if token.save
-             flash.now[:notice] = "Please copy the Voter ID and code "
+           if @token.save
+             # flash.now[:notice] = "Please copy the Voter ID and code "
+             
            end
        
       end

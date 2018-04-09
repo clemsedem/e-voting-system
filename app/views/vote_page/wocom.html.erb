@@ -6,7 +6,7 @@
 <% end %>	
 <h4 style="font-size: 28px">Women Commissioner Elections</h4>
 <p style="text-align: center; font-weight: bold; font-size: 14px; color: red">Please click on the thumbprint to vote</p>
-<div class="table-responsive" >
+<!-- <div class="table-responsive" > -->
 	 <table class="w3-table table w3-card " style="background: #7978754f"> 
 	 	<thead>
 	    <tr class="">
@@ -36,7 +36,7 @@
 	 	<%end%>   
        </tbody>  
 	</table>
-</div>
+<!-- </div> -->
 <br> 
 <%= will_paginate @wocom_candidates,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "vote_page", :action => "wocom", count: params[:count], page: params[:page] }  %>
  

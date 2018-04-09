@@ -7,13 +7,11 @@ class CandidateMaster < ActiveRecord::Base
   validates :portfolio_id, presence: {message: "Please select a voter id"}
   
   belongs_to :registered_voter, class_name: 'RegisteredVoter', foreign_key: :voter_id
+  
   belongs_to :portfolio_master, class_name: 'PortfolioMaster', foreign_key: :portfolio_id
-#   
-#   
-  # has_attached_file :image, styles: {large: "600x600", medium: "300x300>", thumb: "150x150>" }, default_url: "/images/:style/default-user1.pngann"
-  # validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
-#   
-
+  
+  has_many :vote_results, foreign_key: :voter_id
+  
   # filter by portfolio
   def self.portfolio_search(portfolio)    
       portfolio = "%#{portfolio}%"
