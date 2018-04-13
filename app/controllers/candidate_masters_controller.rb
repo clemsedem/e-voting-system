@@ -5,12 +5,12 @@ class CandidateMastersController < ApplicationController
   # GET /candidate_masters
   # GET /candidate_masters.json
   def index
-    @candidate_masters = CandidateMaster.all.paginate(:page => params[:page], :per_page => 10)
+    @candidate_masters = CandidateMaster.all.paginate(:page => params[:page], :per_page => 5).order('id asc')
     
     if params[:count]
       params[:count]
    else
-     params[:count] = 10
+     params[:count] = 5
    end
    
    if params[:page]
@@ -21,12 +21,12 @@ class CandidateMastersController < ApplicationController
    
    if params[:per_page].present?
       # perpage = params[:per_page]
-      @per_page = params[:per_page] || CandidateMaster.per_page || 10
+      @per_page = params[:per_page] || CandidateMaster.per_page || 5
       @candidate_masters = CandidateMaster.paginate( :per_page => @per_page, :page => params[:page])
    else
-     perpage = 10
+     perpage = 5
    end
-   @per_page = params[:per_page] || CandidateMaster.per_page || 10
+   @per_page = params[:per_page] || CandidateMaster.per_page || 5
    page = if params[:page]
             params[:page].to_i
            else
@@ -115,7 +115,7 @@ class CandidateMastersController < ApplicationController
   def all_candidate_excel
     @candidate_master = CandidateMaster.all.order('created_at desc')
     respond_to do |format|
-      # format.json {render json: @search_json[1..10]}
+      # format.json {render json: @search_json[1..5]}
       # p "JSON ARRAY: #{@search_json}"
       format.html
       format.js

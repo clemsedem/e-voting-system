@@ -17,7 +17,7 @@
            <div class="w3-container" > 				 		      	
               
                <div class="form-inputs">
-	                <%= f.input :voter_id, label: "Enter candidate name", collection:  @the_list,  label_method: :first, value_method: :last, input_html:{class:"combobox"} %>
+	                <%= f.input :candidate_id, label: "Enter candidate name", collection:  @the_list,  label_method: :first, value_method: :last, input_html:{class:"combobox"} %>
    					<%= f.input :portfolio_id, collection: PortfolioMaster.all, label_method: :portfolio, value_method: :ref_id %>
 				    <%= f.input :user_id, as: :hidden %>
 				    <%= f.input :active_status, as: :hidden, input_html: {value: 1} %>

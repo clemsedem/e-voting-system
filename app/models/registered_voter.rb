@@ -16,8 +16,11 @@ class RegisteredVoter < ActiveRecord::Base
   belongs_to :session_master, class_name: 'SessionMaster', foreign_key: :session_id
   belongs_to :program_master, class_name: 'ProgramMaster', foreign_key: :program_id
   
-  has_many :candidate_masters, foreign_key: :voter_id
- 
+  has_many :candidate_masters, foreign_key: :candidate_id
+  
+  
+  has_many :vote_results, foreign_key: :voter_id
+  
   
   # has_many :vote_results, through: :candidate_masters
   

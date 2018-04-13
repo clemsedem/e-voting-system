@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180315082036) do
+ActiveRecord::Schema.define(version: 20180410180124) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20180315082036) do
   end
 
   create_table "candidate_masters", force: :cascade do |t|
-    t.string   "voter_id"
+    t.string   "candidate_id"
     t.string   "portfolio_id"
     t.integer  "user_id"
     t.boolean  "active_status"
@@ -175,7 +175,7 @@ ActiveRecord::Schema.define(version: 20180315082036) do
   create_table "vote_results", force: :cascade do |t|
     t.string   "portfolio_id"
     t.string   "voter_id"
-    t.integer  "candidate_id"
+    t.string   "candidate_id"
     t.integer  "user_id"
     t.boolean  "active_status"
     t.boolean  "del_status"
