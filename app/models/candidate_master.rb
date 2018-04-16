@@ -8,6 +8,7 @@ class CandidateMaster < ActiveRecord::Base
   
   validates :candidate_id, presence: {message: "Please select a candidate id"}
   validates :portfolio_id, presence: {message: "Please select a voter id"}
+  validates :slot_id, presence: {message: "Please a slot number for the candidate"}
   
   belongs_to :registered_voter, class_name: 'RegisteredVoter', foreign_key: :candidate_id
   
@@ -17,12 +18,13 @@ class CandidateMaster < ActiveRecord::Base
   
   
   # filter by portfolio
-  def self.portfolio_search(portfolio)    
-      portfolio = "%#{portfolio}%"
-      joins(:portfolio_master).where('portfolio_masters.portfolio LIKE ?', portfolio) 
+  def self.candidate_id_search(candidate_id)    
+      candidate_id = "%#{candidate_id}%"
+      where('candidate_id LIKE ?', candidate_id)
+      # joins(:portfolio_master).where('portfolio_masters.portfolio LIKE ?', portfolio) 
   end
   
-   
+    
   # filter by date
   def self.search_date(start = nil, ended = nil)
     if start && ended

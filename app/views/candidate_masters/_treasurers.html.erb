@@ -1,0 +1,317 @@
+<div class="container" id = "page-container" >
+<!-- <h4>Candidates</h4> -->
+<p style = 'text-align: center; font-family: tahoma; font-size: 15px;'>
+  	<b>Download All Candidates:</b>  
+        <%= link_to "CSV", all_candidate_excel_path(format: "csv"), :class => "w3-hover-white", method: :get%> 
+      | <%= link_to "Excel", all_candidate_excel_path(format: "xls"),:class => "w3-hover-white", method: :get%>
+</p>
+<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>	
+	
+	<div class="pull-left" style = 'margin-top: %;'>
+	   <%= form_tag treasurer_path, method: :get, remote: true, input_html:{display:"block"} do %>
+			<div class="radio_div"> 
+			   <b>Filter By:</b><br />
+			   <input id="candidate_tr" type="radio" name="search_param" value="candidate_tr" class = "w3-radio" /> Candidate ID
+			   <!-- <input id="program_name" type="radio" name="search_param" value="program_name" class = "w3-radio" /> Program
+		       <input id="session" type="radio" name="search_param" value="session" class = "w3-radio" /> Session
+		       <input  id="level" type="radio" name="search_param" value="level" class = "w3-radio" /> Level -->
+		       
+			   <input id="date_tr" type="radio" name="search_param" value="date_tr" class = "w3-radio" /> Date  
+			</div>
+					
+										
+			<div class="form-inline" style = 'margin-top: 5px; margin-bottom: '>
+				<input id="search-field_tr" class="hidden w3-input w3-border w3-round form-control"  name="search_value" />
+				<input type="submit" id="search-field2_tr" class=" hidden w3-button w3-blue w3-round-xxlarge w3-small" value="Search"  >
+			</div>
+					
+			<div id="date_div" class="form-inline" style ="margin-top: 5px; margin-bottom:">
+		         <input type="text" class="hidden w3-input w3-border w3-round form-control" data-provide='datepicker' name="start_date" id="date-field_tr" placeholder="Start date "/>
+		         <span class="add-on hidden" id = 'to_tr'> to </span>
+		                
+		         <input type="text" class="hidden w3-input w3-border w3-round form-control" data-provide='datepicker' name="end_date" id="date-field2_tr" placeholder="End date "/>
+		               
+		         <input type="submit" id="search-field3_tr" class=" hidden w3-button w3-blue w3-round-xxlarge w3-small" value="Search" style = "margin-left: 5px;" >
+	  
+	       </div>
+	      
+	                
+	    <% end %>
+	   
+	</div>
+	
+	 <div class="pull-right" style = 'margin-top: %; '>
+	  <label class="">Display <u>No</u>: </label>  
+	   <%= select_tag :per_page, options_for_select([3,4, 5, 6, 7, 10, 100], params[:per_page].to_i), :data => { :remote => true, 
+	 	            :url => url_for( :controller => "candidate_masters", :action => "president" )
+	 	             }, remote: true, class: "w3-bordered w3-round-xlarge w3-btn w3-small w3-card-4 w3-white" %>	
+     </div>
+     <div class="clearfix"></div>
+	<br />
+
+
+
+<div class="table-responsive" id="table">
+	<table class="table table-condensed table-bordered table-striped w3-card">
+	  <thead>
+	    <tr class="w3-pale-blue">
+	      <th>Slot</th>
+	      <th>Profile Image</th>
+	      <th>Candidate ID</th>
+	      <th>Candidate Name</th>
+     	  <th>Portfolio</th>	
+     	  <th>Added By</th>      
+	      <th>Status</th>
+	      <th colspan="2">Options</th>
+	    </tr> 
+	  </thead>
+	
+	  <tbody>
+	    <% @candidate_tr.each do |candidate_tr| %>
+	      <tr>
+	      	<td><%= candidate_tr.slot_id %></td>
+	      	<td style="width: 10%">
+	      		<% if candidate_tr.image.present?%>
+	      		  <%= image_tag candidate_tr.image.url(:thumb), class: "img-thumbnail ", style: "width: 100px;  margin: 2px" %>	      		  
+	      		<%else%>
+	      		  <%= image_tag ('user.png'), class: "img-thumbnail", style: "width: 100px;  margin: 2px" %> 
+	      		<%end%>
+	      	</td> 
+	        <td><%= candidate_tr.candidate_id %></td>
+	        <td><%= candidate_tr.registered_voter.surname %> <%= candidate_tr.registered_voter.other_names %></td>
+	        <td><%= candidate_tr.portfolio_master.portfolio %></td>
+	        <td><%= candidate_tr.user_id %></td>
+	        <% if candidate_tr.active_status == true %>  
+	            <td style="color: ">Active</td>	      		 
+	        <%elsif candidate_tr.active_status == false %>
+	            <td style="color: red">Inactive</td>	      		
+	        <%end%>
+	        
+	        <td style="width: 10px">
+		        <%= link_to  edit_candidate_master_path(candidate_tr), class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge " do %>
+				    <i class="fa fa-edit fa-2x" style="color: blue" aria-hidden="true" title="Edit Faculty"> </i>  
+			    <% end %> 		        	
+		    </td>
+		    
+		    <td style="width: 10px">
+			    <% if candidate_tr.active_status == false %>
+			       		<%= link_to  enable_candidate_tr_path(:chosen => candidate_tr.id), remote: true, :title =>"", class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge ", data: { confirm: 'You are about to restore the selected candidate. Do you want to continue?' } do %>
+						  <i class="fa fa-check fa-2x" style="color: green" aria-hidden="true" title="Restore Department"> </i>  
+						<% end %> 
+			       
+		        <% else candidate_tr.active_status == true %>
+		           		<%= link_to  disable_candidate_tr_path(:chosen => candidate_tr.id),remote: true,  class: "w3-btn w3-sand w3-card  w3-tiny w3-round w3-round-xxlarge ", data: { confirm: 'You are about to delete the selected candidate. Do you want to continue?' } do %>
+						  <i class="fa fa-trash-o fa-2x" style="color: red" aria-hidden="true" title="Delete Department"> </i>  
+		                <% end %>		          
+		        <% end %>	
+	       </td> 
+ 
+	      </tr>
+	    <% end %>
+	  </tbody>
+	</table>
+</div>
+<br>
+
+<%= link_to '+', new_candidate_master_path, class: "w3-button w3-circle w3-light-blue w3-hover-pale-blue" %>
+<%= will_paginate @candidate_tr,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "candidate_masters", :action => "treasurer", count: params[:count], page: params[:page] }  %>
+</div>
+<br />
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 4000);
+ });
+ 
+</script>
+
+<script>
+  $(function(){
+    $('.pagination a').attr('data-remote', 'true')
+  });
+
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $(".radio_div div input").click(function() {
+            $("#date_div").addClass("hidden");
+            $("#search-field").removeClass("hidden");
+            $("#narrative_div").addClass("hidden");
+            //$("#date_div").fadeIn('slow');
+        });
+        
+        // filter by portfolio
+        $("#candidate_tr").click(function() {
+            if ($("#candidate_tr").is(":checked")) {
+            	 // alert('checked')
+                $("#search-field_tr").attr("placeholder", "Enter candidate id");
+                $("#search-field2_tr").removeClass("hidden");
+                $("#search-field_tr").removeClass("hidden");
+                $("#date-field_tr").addClass("hidden");
+                $("#date-field2_tr").addClass("hidden");
+                $("#search-field3_tr").addClass("hidden");
+                $("#to_tr").addClass("hidden");
+            }
+        });
+        
+        // filter by voter
+        // $("#voter_id").click(function() {
+            // if ($("#voter_id").is(":checked")) {
+                // $("#search-field").attr("placeholder", "Enter the voter id number");
+                // $("#search-field2").removeClass("hidden");
+                // $("#search-field").removeClass("hidden");
+                // $("#date-field").addClass("hidden");
+                // $("#date-field2").addClass("hidden");
+                // $("#search-field3").addClass("hidden")
+                // $("#to").addClass("hidden");
+            // }
+        // });
+//         
+//         
+        // // filter by session
+        // $("#session").click(function() {
+            // if ($("#session").is(":checked")) {
+                // $("#search-field").attr("placeholder", "Enter the session");
+                // $("#search-field2").removeClass("hidden");
+                // $("#search-field").removeClass("hidden");
+                // $("#date-field").addClass("hidden");
+                // $("#date-field2").addClass("hidden");
+                // $("#search-field3").addClass("hidden")
+                // $("#to").addClass("hidden");
+            // }
+        // });
+//         
+//         
+        // // filter by level
+        // $("#level").click(function() {
+            // if ($("#level").is(":checked")) {
+                // $("#search-field").attr("placeholder", "Enter the level");
+                // $("#search-field2").removeClass("hidden");
+                // $("#search-field").removeClass("hidden");
+                // $("#date-field").addClass("hidden");
+                // $("#date-field2").addClass("hidden");
+                // $("#search-field3").addClass("hidden")
+                // $("#to").addClass("hidden");
+            // }
+        // });
+//         
+       
+      
+        
+        ////////////////////////////////////////////////////////////////////////////
+        $("#location").click(function() {
+            if ($("#location").is(":checked")) {
+                $("#search-field").attr("placeholder", "Enter the location");
+                $("#date_div").addClass("hidden");
+                $("#search-field").removeClass("hidden");
+                $("#search-field2").removeClass("hidden")
+            }
+        });
+        $("#recipient_number").click(function() {
+            if ($("#recipient_number").is(":checked")) {
+                $("#search-field").attr("placeholder", "Recipient Number");
+                $("#date_div").addClass("hidden");
+                $("#search-field").removeClass("hidden");
+            }
+        });
+        
+        
+         //////////////////////////clicking on filter by date
+        $("#date_tr").click(function() {
+            //if ($("#date").is(":checked")){
+            $("#date_div").removeClass("hidden");
+            $("#search-field_tr").addClass("hidden");
+            $("#date-field_tr").removeClass("hidden");
+            $("#date-field2_tr").removeClass("hidden");
+            $("#search-field2_tr").addClass("hidden");
+            $("#search-field_tr").addClass("hidden");
+            $("#search-field3_tr").removeClass("hidden");
+            $("#to_tr").removeClass("hidden");
+            //$("#date_div").fadeIn('slow');
+            //}
+        });
+        
+        $("#date-field_tr").click(function() {
+           // if ($("#date").is(":checked")){
+            $("#date_div").removeClass("hidden");
+            $("#search-field_tr").addClass("hidden");
+            $("#date-field_tr").removeClass("hidden");
+            $("#date-field2_tr").removeClass("hidden");
+            // $("#search-field3").removeClass("hidden")
+            //$("#date_div").fadeIn('slow');
+            //}
+        });
+        $("#date-field2_tr").click(function() {
+            //if ($("#date").is(":checked")){
+            $("#date_div").removeClass("hidden");
+            $("#search-field_tr").addClass("hidden");
+            $("#date-field_tr").removeClass("hidden");
+            $("#date-field2_tr").removeClass("hidden");
+            $("#search-field3_tr").removeClass("hidden")
+            //$("#date_div").fadeIn('slow');
+            //}
+        });
+        
+        
+        ///////////////////////////////////////////////////
+        $.fn.datepicker.noConflict = function() {
+            $.fn.datepicker = old;
+            return this;
+        };
+        ////////////////////////////////////////////////////
+        $(function() {
+            $('#date-field_tr').datepicker({
+                dateFormat : 'yy-mm-dd'
+            }).val();
+        });
+        //////////////////////////////////////////////////////
+        $(function() {
+            $('#date-field2_tr').datepicker({
+                dateFormat : 'yy-mm-dd'
+            });
+        });
+        
+        
+        
+     
+        // ///////////////////////////////////////////////////
+        // $.fn.datepicker.noConflict = function() {
+            // $.fn.datepicker = old;
+            // return this;
+        // };
+        // ////////////////////////////////////////////////////
+        // $(function() {
+            // $('#date-field').datepicker({
+                // dateFormat : 'yy-mm-dd'
+            // });
+        // });
+        // //////////////////////////////////////////////////////
+        // $(function() {
+            // $('#date-field2').datepicker({
+                // dateFormat : 'yy-mm-dd'
+            // });
+        // });
+//         
+        $('#csv').click(function() {
+            console.log('works!');
+            $('#csv_perpage').val($('#record').val());
+            $('#csv_page').val($('li.active span').html());
+            $('#csv_submit').click();
+            console.log('works!');
+        });
+        /////////////////////////////////////////////////////////////
+        $('#excel').click(function() {
+            $('#excel_perpage').val($('#record').val());
+            $('#excel_page').val($('li.active span').html());
+            $('#excel_submit').click();
+        });
+    });
+</script>
+
+

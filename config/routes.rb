@@ -98,8 +98,16 @@ Rails.application.routes.draw do
  get       'disable_voter'   =>  'registered_voters#disable_voter'
  
  # Enable and disable candidate
- get       'enable_candidate'   =>  'candidate_masters#enable_candidate'
- get       'disable_candidate'   =>  'candidate_masters#disable_candidate'
+ get       'enable_candidate_prez'   =>  'candidate_masters#enable_candidate_prez'
+ get       'disable_candidate_prez'   =>  'candidate_masters#disable_candidate_prez'
+ 
+ get       'enable_candidate_sec'   =>  'candidate_masters#enable_candidate_sec'
+ get       'disable_candidate_sec'   =>  'candidate_masters#disable_candidate_sec'
+ 
+ get       'enable_candidate_tr'   =>  'candidate_masters#enable_candidate_tr'
+ get       'disable_candidate_tr'   =>  'candidate_masters#disable_candidate_tr'
+ 
+ 
  
  # Enable and disable user
  get       'enable_user'   =>  'users#enable_user'
@@ -145,6 +153,11 @@ Rails.application.routes.draw do
  get 'all_roles_excel' => 'roles#all_roles_excel'
  
  
- 
+ # filtering tabbed candidates
+ get 'president' => 'candidate_masters#president'
+ get 'secretary' => 'candidate_masters#secretary'
+ get 'treasurer' => 'candidate_masters#treasurer'
+ get 'finance_sec' => 'candidate_masters#finance_sec'
+ get 'wocom' => 'candidate_masters#wocom'
   
 end
