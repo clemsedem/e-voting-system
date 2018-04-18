@@ -19,7 +19,7 @@
     	<% if @user_token && @encrypted_token %>
 	   		<h5 id="voter_id_display2" style="margin-top: -5%"><b> Voter Name:</b>  <span style="font-weight: bold; color: red;%"><%= @voter.surname %> <%= @voter.other_names %></span></h5> 
 	    	<h5 id="voter_id_display" style="margin-top: %"><b> Voter ID:</b>  <span style="font-weight: bold; color: red;%"><%= @token.voter_id %></span></h5> 
-	    	<h5 id="voter_id_display1" ><b> Voter Passcode:</b>  <span style="font-weight: bold; color: red "><%= @user_token %></span></h5> 
+	    	<h5 id="voter_id_display1" ><b> Voter Passcode:</b>  <span style="font-weight: bold; color: red; font-family: Courier New "><%= @user_token %></span></h5> 
     	<%end%>
     	
    	  <%= form_tag verify_voter_path, method: :get,  input_html:{display:"block"} do %>

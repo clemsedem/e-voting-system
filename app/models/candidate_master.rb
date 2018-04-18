@@ -9,6 +9,7 @@ class CandidateMaster < ActiveRecord::Base
   validates :candidate_id, presence: {message: "Please select a candidate id"}
   validates :portfolio_id, presence: {message: "Please select a voter id"}
   validates :slot_id, presence: {message: "Please a slot number for the candidate"}
+  validates_uniqueness_of :candidate_id
   
   belongs_to :registered_voter, class_name: 'RegisteredVoter', foreign_key: :candidate_id
   

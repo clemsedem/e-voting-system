@@ -8,7 +8,9 @@ class CandidateMastersController < ApplicationController
     @candidate_prez = CandidateMaster.where(portfolio_id: "P").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
     @candidate_sec = CandidateMaster.where(portfolio_id: "S").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
     @candidate_tr = CandidateMaster.where(portfolio_id: "TR").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
-    
+    @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+     
    
     # if params[:count]
       # params[:count]
@@ -326,6 +328,162 @@ class CandidateMastersController < ApplicationController
     
   end
 
+  def finance_sec
+      @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    
+   
+    if params[:count]
+      params[:count]
+   else
+     params[:count] = 3
+   end
+   
+   if params[:page]
+     page = params[:page].to_i
+   else
+     page = 1
+   end
+   
+   if params[:per_page].present?
+      # perpage = params[:per_page]
+      @per_page = params[:per_page] || CandidateMaster.where(portfolio_id: "P").per_page || 3
+      @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate( :per_page => @per_page, :page => params[:page]).order('slot_id asc')
+   else
+     perpage = 3
+   end
+   @per_page = params[:per_page] || CandidateMaster.where(portfolio_id: "FS").per_page || 3
+   page = if params[:page]
+            params[:page].to_i
+           else
+            1
+           end
+ 
+   if  params[:search_value] && params[:search_value].strip != ''
+     
+     if params[:search_param] == 'candidate_f_sec'
+       logger.info "the code comes to if  candidate f_sec............"
+       @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").candidate_id_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('slot_id asc')
+       
+      # elsif params[:search_param] == 'program_name'
+        # logger.info "the code comes to elsif program name............."
+         # @candidate_masters = CandidateMaster.program_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('created_at asc')
+#          
+      # elsif params[:search_param] == 'session'
+        # logger.info "the code comes to elsif session............."
+         # @candidate_masters = CandidateMaster.session_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('created_at asc')
+#      
+#      
+      # elsif params[:search_param] == 'level'
+        # logger.info "the code comes to elsif level............."
+         # @candidate_masters = CandidateMaster.level_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('created_at asc')
+#         
+     else
+       logger.info "the code comes to the else...."
+        @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate(page: params[:page], per_page: params[:count]).order('slot_id asc')
+        @search_json = []
+     end
+    
+    elsif params[:search_param] == 'date_f_sec'
+       logger.info "the code comes to elsif date............."
+       
+       start = (params["start_date"] + " " + "0:00:00")# Time.zone.parse(params["start_date"].to_s + " " + "0:00:00").utc # params["start_date"].to_s + "0:00:00"
+       ended = params["end_date"] + " " + ("23:59:59") # Time.zone.parse(params["end_date"].to_s + " " + "23:59:59").utc # params["end_date"].to_s + "23:59:59"
+       @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").search_date(start,ended).paginate(page: params[:page], per_page: params[:count]).order('slot_id asc')
+ 
+     
+   end
+   p "JSON ARRAY: #{@search_json}" 
+#     
+    
+    respond_to do |format|
+      logger.info "what is the url calling this??: ans #{request.referer}"
+      format.js
+      format.html
+      format.csv { send_data @candidate_masters.to_csv(options = {}, page, perpage)}
+      format.xls { send_data @candidate_masters.to_csv(options={col_sep: "\t"}, page, perpage)}
+    end
+    
+  end
+  
+  
+  def wocom
+    @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    
+   
+    if params[:count]
+      params[:count]
+   else
+     params[:count] = 3
+   end
+   
+   if params[:page]
+     page = params[:page].to_i
+   else
+     page = 1
+   end
+   
+   if params[:per_page].present?
+      # perpage = params[:per_page]
+      @per_page = params[:per_page] || CandidateMaster.where(portfolio_id: "WC").per_page || 3
+      @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate( :per_page => @per_page, :page => params[:page]).order('slot_id asc')
+   else
+     perpage = 3
+   end
+   @per_page = params[:per_page] || CandidateMaster.where(portfolio_id: "WC").per_page || 3
+   page = if params[:page]
+            params[:page].to_i
+           else
+            1
+           end
+ 
+   if  params[:search_value] && params[:search_value].strip != ''
+     
+     if params[:search_param] == 'candidate_wocom'
+       logger.info "the code comes to if  candidate wocom............"
+       @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").candidate_id_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('slot_id asc')
+       
+      # elsif params[:search_param] == 'program_name'
+        # logger.info "the code comes to elsif program name............."
+         # @candidate_masters = CandidateMaster.program_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('created_at asc')
+#          
+      # elsif params[:search_param] == 'session'
+        # logger.info "the code comes to elsif session............."
+         # @candidate_masters = CandidateMaster.session_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('created_at asc')
+#      
+#      
+      # elsif params[:search_param] == 'level'
+        # logger.info "the code comes to elsif level............."
+         # @candidate_masters = CandidateMaster.level_search(params[:search_value].strip).paginate(page: params[:page], per_page: params[:count]).order('created_at asc')
+#         
+     else
+       logger.info "the code comes to the else...."
+        @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate(page: params[:page], per_page: params[:count]).order('slot_id asc')
+        @search_json = []
+     end
+    
+    elsif params[:search_param] == 'date_wocom'
+       logger.info "the code comes to elsif date............."
+       
+       start = (params["start_date"] + " " + "0:00:00")# Time.zone.parse(params["start_date"].to_s + " " + "0:00:00").utc # params["start_date"].to_s + "0:00:00"
+       ended = params["end_date"] + " " + ("23:59:59") # Time.zone.parse(params["end_date"].to_s + " " + "23:59:59").utc # params["end_date"].to_s + "23:59:59"
+       @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").search_date(start,ended).paginate(page: params[:page], per_page: params[:count]).order('slot_id asc')
+ 
+     
+   end
+   p "JSON ARRAY: #{@search_json}" 
+#     
+    
+    respond_to do |format|
+      logger.info "what is the url calling this??: ans #{request.referer}"
+      format.js
+      format.html
+      format.csv { send_data @candidate_masters.to_csv(options = {}, page, perpage)}
+      format.xls { send_data @candidate_masters.to_csv(options={col_sep: "\t"}, page, perpage)}
+    end
+    
+  end
+
+
 
   # GET /candidate_masters/1
   # GET /candidate_masters/1.json
@@ -396,6 +554,29 @@ class CandidateMastersController < ApplicationController
           end
       end   
   end
+  
+  
+  def enable_candidate_f_sec
+      candidate_id=params[:chosen]
+      candidate = CandidateMaster.find(candidate_id)
+      respond_to do |format|
+          if candidate.update(:active_status => 1)
+            format.js {flash.now[:notice] = 'Candidate was successfully enabled.' }
+             @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')           
+          end
+      end   
+  end
+  
+  def enable_candidate_wocom
+      candidate_id=params[:chosen]
+      candidate = CandidateMaster.find(candidate_id)
+      respond_to do |format|
+          if candidate.update(:active_status => 1)
+            format.js {flash.now[:notice] = 'Candidate was successfully enabled.' }
+             @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')           
+          end
+      end   
+  end
 
   
   
@@ -433,6 +614,31 @@ class CandidateMastersController < ApplicationController
            if candidate.update(:active_status => 0)
              format.js {flash.now[:notice] = 'Candidate was successfully disabled.'}
               @candidate_tr = CandidateMaster.where(portfolio_id: "TR").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')         
+         end
+       end
+           
+    end 
+    
+    
+    def disable_candidate_f_sec
+        candidate_id=params[:chosen]    
+        candidate = CandidateMaster.find(candidate_id)    
+       respond_to do |format|
+           if candidate.update(:active_status => 0)
+             format.js {flash.now[:notice] = 'Candidate was successfully disabled.'}
+              @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')         
+         end
+       end
+           
+    end 
+    
+    def disable_candidate_wocom
+        candidate_id=params[:chosen]    
+        candidate = CandidateMaster.find(candidate_id)    
+       respond_to do |format|
+           if candidate.update(:active_status => 0)
+             format.js {flash.now[:notice] = 'Candidate was successfully disabled.'}
+              @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')         
          end
        end
            
@@ -494,6 +700,6 @@ class CandidateMastersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def candidate_master_params
-      params.require(:candidate_master).permit(:voter_id, :portfolio_id, :user_id, :active_status, :del_status,  :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at, :slot_id  )
+      params.require(:candidate_master).permit(:candidate_id, :portfolio_id, :user_id, :active_status, :del_status,  :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at, :slot_id  )
     end
 end

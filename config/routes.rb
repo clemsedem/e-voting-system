@@ -107,6 +107,14 @@ Rails.application.routes.draw do
  get       'enable_candidate_tr'   =>  'candidate_masters#enable_candidate_tr'
  get       'disable_candidate_tr'   =>  'candidate_masters#disable_candidate_tr'
  
+ get       'enable_candidate_f_sec'   =>  'candidate_masters#enable_candidate_f_sec'
+ get       'disable_candidate_f_sec'   =>  'candidate_masters#disable_candidate_f_sec'
+ 
+ get       'enable_candidate_wocom'   =>  'candidate_masters#enable_candidate_wocom'
+ get       'disable_candidate_wocom'   =>  'candidate_masters#disable_candidate_wocom'
+ 
+ 
+ 
  
  
  # Enable and disable user

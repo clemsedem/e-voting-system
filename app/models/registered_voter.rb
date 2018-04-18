@@ -8,6 +8,7 @@ class RegisteredVoter < ActiveRecord::Base
   validates :session_id, presence: {message: "Please select a session for the voter"}
   validates :program_id, presence: {message: "Please select a program offerd by the voter"}
   validates :gender, presence: {message: "Please select a gender for the voter"}
+  validates_uniqueness_of :voter_id
   
   before_save :titler_surname, :titler_other_names
   

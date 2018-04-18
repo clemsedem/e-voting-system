@@ -47,7 +47,7 @@
 						</td>
 						<td ><h4 >None</h4></td>
 						<td>
-					 	  <%= link_to submit_vote_result_path(:portfolio => 'NONE', :voter => @voter_token, :me => 'NONE' ), method: :post, data: { confirm: 'Are you sure you want to vote for the selected candidate? Action not reversible!!' } do %>
+					 	  <%= link_to submit_vote_result_path(:portfolio => 'P_NONE', :voter => @voter_token, :me => 'NONE' ), method: :post, data: { confirm: 'Are you sure you want to vote for the selected candidate? Action not reversible!!' } do %>
 							 <%= image_tag "thumb1edit.png", class: "img-responsive w3-right", style: "width: 150px" %> 
 						  <% end %>
 					   </td>

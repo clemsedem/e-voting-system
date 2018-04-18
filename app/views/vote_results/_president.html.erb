@@ -1,69 +1,57 @@
-<% if flash[:notice] %>
-   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
-<% end %>	
-
-<h4>Presidential Results</h4>
-<br />
-	<p style = 'text-align: center; font-family: tahoma; font-size: 15px;'>
-  		 <b>Download:</b>  
-                      <%= link_to "CSV", all_candidate_excel_path(format: "csv"), :class => "w3-hover-white", method: :get%> 
-                     | <%= link_to "Excel", all_candidate_excel_path(format: "xls"),:class => "w3-hover-white", method: :get%>
-	</p>
-
-     <div class="clearfix"></div>
-	<br />
-
-
-
-<div class="table-responsive" id="table">
-	<table class="table table-condensed table-bordered table-striped w3-card">
-	  <thead>
-	    <tr class="w3-pale-blue">
-	      <th>S/N</th>
-	      <th>Voter</th>
-	      <th>Voter ID</th>
-	      <th>Candidate</th>
-	      <th>User</th>
-	      <th>Active status</th>
-	      <th>Del status</th>
-	      <th colspan="3"></th>
-	    </tr> 
-	  </thead>
+<div class="row w3-padding">
+	<h4>Presidential Results</h4>
+	<h5 style="font-family: Tahoma; font-weight: bold; font-size: 20px">Total Number of Reg. Voters: <span style="font-weight: bold; font-family: Tahoma; font-size: 30px; color: blue; margin-left: 20px "> <%= @total_reg_voters%></span> </h5>
+	<h5 style="font-family: Tahoma; font-weight: bold; font-size: 20px">Total Votes for Presidents: <span style="font-weight: bold; font-family: Tahoma; font-size: 30px; color: blue; margin-left: 20px "><%= @vote_cast_for_prez %></span> </h3>
+	<h3 style="font-family: Tahoma; font-weight: bold; font-size: 20px">Total Valid Votes for Presidents: <span style="font-weight: bold; font-family: Tahoma; font-size: 30px; color: blue; margin-left: 20px "><%= @total_valid_votes_for_prez %></span> </h3>
+	<h3 style="font-family: Tahoma; font-weight: bold; font-size: 20px">Total Rejected Votes for Presidents: <span style="font-weight: bold; font-family: Tahoma; font-size: 30px; color: blue; margin-left: 20px "><%= @total_rejected_vote_for_prez %> <i style="color: red">(<%= @reject_per_final %>%)</i></span> </h3>
+	<div class="w3-clear clearfix"></div>
 	
-	  <tbody>
-	    <% @presidents.each_with_index do |president, index| %>
-	      <tr>
-	      	<td><%= index+1 %></td>
-	      	<td><%= president.registered_voter.voter_id %></td>
-	        <td>
-	        	<%= president.portfolio_id %>
-	        </td>
-	        
-	        <td><%= president.candidate_master.registered_voter.surname %></td>
-	        <td><%= president.user_id %></td>
-	        <td><%= president.active_status %></td>
-	        <td><%= president.del_status %></td>
-	        <td><%= link_to 'Show', president %></td>
-	        <td><%= link_to 'Edit', edit_vote_result_path(president) %></td>
-	        <td><%= link_to 'Destroy', president, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-
-	      </tr>
-	    <% end %>
-	  </tbody>
-	</table>
+	<div class="col-med-4 col-xs-4 prez1 w3-card" style="text-align: center">
+		<br />
+		<% if @candidate1.image.present?%>
+			 <%= image_tag @candidate1.image.url(:thumb), class: "img-circle ", style: "width: 100px;  margin: 2px" %>	      		  
+		<%else%>
+			<%= image_tag ('user.png'), class: "img-circle", style: "width: 100px;  margin: 2px" %> 
+		<%end%>
+		<div class="w3-clear"></div>
+		<%= @candidate1.registered_voter.surname %>	<%= @candidate1.registered_voter.other_names %>		
+		    <h5>Votes: <%= @count_prez1 %></h5>
+		    <h5>Percentage: <%= @prez1_per_final %>%</h5>
+		    
+		 
+	</div>
+	<div class="col-med-4 col-xs-4 prez2 w3-card" style="text-align: center">
+		<br />
+		<% if @candidate2.image.present?%>
+			 <%= image_tag @candidate2.image.url(:thumb), class: "img-circle ", style: "width: 100px;  margin: 2px" %>	      		  
+		<%else%>
+			<%= image_tag ('user.png'), class: "img-circle", style: "width: 100px;  margin: 2px" %> 
+		<%end%>
+		<div class="w3-clear"></div>
+		<%= @candidate2.registered_voter.surname %>	<%= @candidate2.registered_voter.other_names %>
+		<h5>Votes: <%= @count_prez2 %></h5>	
+		<h5>Percentage: <%= @prez2_per_final %>%</h5>
+		
+	</div>
+	
+	<div class="col-med-4 col-xs-4 prez3 w3-card" style="text-align: center">
+		<br />
+		<% if @candidate3.image.present?%>
+			 <%= image_tag @candidate3.image.url(:thumb), class: "img-circle ", style: "width: 100px;  margin: 2px" %>	      		  
+		<%else%>
+			<%= image_tag ('user.png'), class: "img-circle", style: "width: 100px;  margin: 2px" %> 
+		<%end%>
+		<div class="w3-clear"></div>
+		<%= @candidate3.registered_voter.surname %>	<%= @candidate3.registered_voter.other_names %>
+		<h5>Votes: <%= @count_prez3 %></h5>
+		<h5>Percentage: <%= @prez3_per_final %>%</h5>
+					
+	</div>
+	
+	
+	
 </div>
-<br>
-
-<%#= link_to '+', new_president_path, class: "w3-button w3-circle w3-light-blue w3-hover-pale-blue" %>
-<%= will_paginate @presidents,  renderer: BootstrapPagination::Rails, previous_label: 'Older', next_lable: 'Newer', class: "w3-right pagination-sm w3-card-4", :params => { :controller => "vote_results", :action => "index", count: params[:count], page: params[:page] }  %>
 
 
 
-<script type="text/javascript">
-$(document).ready(function(){
-  setTimeout(function(){
-    $('#notes').remove();
-  }, 4000);
- });
- 
-</script>
+
