@@ -158,7 +158,18 @@ h4{
     }   
  
  
+ #votes{
+ 	color: blue;
+ 	font-weight: bold;
+ 	font-size: 24px;
+ }
  
+ #percent{
+ 	color: red;
+ 	font-weight: bold;
+ 	font-size: 24px;
+ 	font-style: italic;
+ }
  
  
  

@@ -174,10 +174,14 @@ class VotePageController < ApplicationController
                if @portfolio_id == 'WC' or @portfolio_id == 'WC_NONE'
                     get_voter = RegisteredVoter.where(voter_id: @voter_id)[0]
                     logger.info "Voter that has finished voting #{get_voter.inspect}"
+                    get_voter_token = VoterToken.where(voter_id: @voter_id, active_status: true)[0]
                  
                     update_vote_status = get_voter.update(
                             vote_status: true
                        )
+                    update_token_status = get_voter_token.update(
+                          active_status: false
+                      )
                      
                          respond_to do |format|
                           format.html { redirect_to root_path, notice: "Thanks for passing by!! Remember your vote is your power." }
