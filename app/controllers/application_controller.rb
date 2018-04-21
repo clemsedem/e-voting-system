@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   
   
    protected
-   
+
    def set_cache_headers
       response.headers["Cache-Control"] = "no-cache, no-store"
       response.headers["Pragma"] = "no-cache"

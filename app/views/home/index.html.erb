@@ -1,3 +1,4 @@
+
 <% if current_user.role.name !=  'Super Admin' %>
      <script type="text/javascript">
         window.location.href="/verification_page/index"  // put your correct path in a string here
@@ -9,8 +10,37 @@
 	  <% if flash[:notice] %>
 		 <p class="flash_notice " id = 'notes' style = "margin-top: 5px"><%= notice %></p>
 	  <% end %>
-	  
-	<h1>Home#index</h1>
-	<p>Find me in app/views/home/index.html.erb</p>
-	
+	    
+	  <div class="row w3-padding">
+		  <div class="col-md-4 col-sm-12 w3-card w3-padding">
+		  	<h4>Presidential Result Statistics</h4> 
+		  	<%= column_chart @prez_chart, :library => {:colors => ["red"]}  %>
+		  </div>
+		  <div class="col-md-4 col-sm-12 w3-card w3-padding">
+		  	<h4>Secretary Result Statistics</h4> 
+		  	<%= column_chart @sec_chart, :library => {:colors => ["green"]}  %>
+		  </div>
+		  <div class="col-md-4 col-sm-12 w3-card w3-padding">
+		  	<h4>Treasurer Result Statistics</h4> 
+		  	<%= column_chart @tr_chart, :library => {:colors => ["blue"]}  %>
+		  </div>		  	  	
+	 </div>
+	 <div class="row w3-padding">
+	 	<div class="col-md-4 col-sm-12 w3-card w3-padding">
+		  	<h4>Fin. Secretary Result Statistics</h4> 
+		  	<%= column_chart @fs_chart, :library => {:colors => ["purple"]}  %>
+		</div>
+		<div class="col-md-4 col-sm-12 w3-card w3-padding">
+		  	<h4>WOCOM Result Statistics</h4> 
+		  	<%= column_chart @wc_chart, :library => {:colors => ["aqua"]}  %>
+		</div>
+		
+	 </div>
+
+<div class="w3-clear"></div>	   	 
 </div>
+<script type="text/javascript">
+   // setTimeout(function(){
+       // location.reload();
+   // },10000);
+</script>

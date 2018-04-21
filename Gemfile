@@ -55,3 +55,4 @@ gem 'will_paginate', '~> 3.1', '>= 3.1.5'
 gem 'will_paginate-bootstrap', '~> 1.0', '>= 1.0.1'
 gem "paperclip", "~> 5.2.1"
 gem 'devise', '~> 4.4', '>= 4.4.1'
+gem "chartkick"
