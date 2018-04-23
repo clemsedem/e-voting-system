@@ -69,7 +69,7 @@ h4{
 
 @media screen  and (max-width: 1024px) {
    #openNav{display: none;}
-   #signout{display: none;}
+   /*#signout{display: none;}*/
    #mySidebar{display: none;}
    /*display: inline-block;*/
    /*width: 100%;*/

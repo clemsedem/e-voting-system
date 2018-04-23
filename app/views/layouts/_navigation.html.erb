@@ -1,59 +1,59 @@
 <% if user_signed_in? %>
-
-<nav class="navbar navbar-default w3-card-4 w3-border navbar-fixed-top my-nav" style="margin-bottom: 20px">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span> 
-      </button>
-      <!-- <button id="openNav" class="w3-button w3-left w3-hover-white w3-tiny" onclick="w3_open()" style="margin-right: 10px; margin-top: 5px; ">&#9776;</button> -->
-     
-      <%= link_to admin_home_path do %> 
-		 <%= image_tag ('vote32.png'), class: "w3-left w3-margin-right w3-margin-left", style: "margin-top: 5px" %>
-      	 <b class="navbar-brand " style="color:#fff; ">Electronic Voting System</b></a>
-	  <% end %>
-      <!-- <span class=" w3-card"  > 
-      	 <%= image_tag ('vote32.png'), class: "w3-left w3-margin-right w3-margin-left", style: "margin-top: 5px" %>
-      	<b class="navbar-brand " style="color:#fff; ">Electronic Voting System</b></a>
-    </span> -->
-    </div>
-  
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-    	
-     	<ul class="nav navbar-nav w3-hide-large w3-white">
-	        <li style="text-align: left;"><%= render 'layouts/navigation_links'  %></li> 
-
-	    </ul>
-      
-      <ul class="nav navbar-nav navbar-right" id="signout">
-      	
-      	<%= link_to destroy_user_session_path, method: :delete,  class: "navbar-brand" do %>
-          	<b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b>
-			<!-- <i class="fa fa-power-off" aria-hidden="true"></i> <span style="margin-left:;">Sign Out</span>  -->
-		<% end %>  
-      	
-      	<!-- <a href="#" class="navbar-brand"> <b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b></a> -->
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-  
-  <% if current_user.role.name == 'Super Admin'%>
-     <div class="w3-sidebar w3-bar-block w3-card w3-left" style="display: ;"  id="mySidebar">
-	     <!-- <span class="w3-right w3-border w3-card w3-tiny w3-white w3-button w3-margin fa-2x w3-hover-white" onclick="w3_close()" style="margin-bottom: 10px" >&#9776;</span> -->
-		<br />
-	    <div class="w3-clear"></div>
-	    <%= render 'layouts/navigation_links' %>
-			   
-      </div>
- <%end%>
-  
-</nav>
-<br /><br /><br />
+	<nav class="navbar navbar-default w3-card-4 w3-border navbar-fixed-top my-nav" style="margin-bottom: 20px">
+	  <div class="container-fluid">
+	    <!-- Brand and toggle get grouped for better mobile display -->
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+	        <span class="sr-only">Toggle navigation</span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span> 
+	      </button>
+	      <!-- <button id="openNav" class="w3-button w3-left w3-hover-white w3-tiny" onclick="w3_open()" style="margin-right: 10px; margin-top: 5px; ">&#9776;</button> -->
+	     
+	      <%= link_to admin_home_path do %> 
+			 <%= image_tag ('vote32.png'), class: "w3-left w3-margin-right w3-margin-left", style: "margin-top: 5px" %>
+	      	 <b class="navbar-brand " style="color:#fff; ">Electronic Voting System</b></a>
+		  <% end %>
+	      <!-- <span class=" w3-card"  > 
+	      	 <%= image_tag ('vote32.png'), class: "w3-left w3-margin-right w3-margin-left", style: "margin-top: 5px" %>
+	      	<b class="navbar-brand " style="color:#fff; ">Electronic Voting System</b></a>
+	    </span> -->
+	    </div>
+	  
+	    <!-- Collect the nav links, forms, and other content for toggling -->
+	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	    	<% if current_user.role.name == 'Super Admin'%>
+		     	<ul class="nav navbar-nav w3-hide-large w3-white">
+			        <li style="text-align: left;"><%= render 'layouts/navigation_links'  %></li> 
+		
+			    </ul>
+	        <%end%>
+	      <ul class="nav navbar-nav navbar-right" id="signout">
+	      	
+	      	<%= link_to destroy_user_session_path, method: :delete,  class: "navbar-brand" do %>
+	          	<b style="color: #fff"><span class="fa fa-power-off "></span> Sign Out</b>
+				<!-- <i class="fa fa-power-off" aria-hidden="true"></i> <span style="margin-left:;">Sign Out</span>  -->
+			<% end %>  
+	      	
+	      
+	      </ul>
+	    </div><!-- /.navbar-collapse -->
+	    
+	  </div><!-- /.container-fluid -->
+	  
+	  <% if current_user.role.name == 'Super Admin'%>
+	     <div class="w3-sidebar w3-bar-block w3-card w3-left" style="display: ;"  id="mySidebar">
+		     <!-- <span class="w3-right w3-border w3-card w3-tiny w3-white w3-button w3-margin fa-2x w3-hover-white" onclick="w3_close()" style="margin-bottom: 10px" >&#9776;</span> -->
+			<br />
+		    <div class="w3-clear"></div>
+		    <%= render 'layouts/navigation_links' %>
+				   
+	      </div>
+	 <%end%>
+	  
+	</nav>
+	<br /><br /><br />
 
 <%end%>
 <!-- Toggele side bar script --> 
