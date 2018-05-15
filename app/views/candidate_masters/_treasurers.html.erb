@@ -61,8 +61,7 @@
 	      <th>Profile Image</th>
 	      <th>Candidate ID</th>
 	      <th>Candidate Name</th>
-     	  <th>Portfolio</th>	
-     	  <th>Added By</th>      
+     	  <th>Portfolio</th>	      
 	      <th>Status</th>
 	      <th colspan="2">Options</th>
 	    </tr> 
@@ -82,7 +81,6 @@
 	        <td><%= candidate_tr.candidate_id %></td>
 	        <td><%= candidate_tr.registered_voter.surname %> <%= candidate_tr.registered_voter.other_names %></td>
 	        <td><%= candidate_tr.portfolio_master.portfolio %></td>
-	        <td><%= candidate_tr.user_id %></td>
 	        <% if candidate_tr.active_status == true %>  
 	            <td style="color: ">Active</td>	      		 
 	        <%elsif candidate_tr.active_status == false %>

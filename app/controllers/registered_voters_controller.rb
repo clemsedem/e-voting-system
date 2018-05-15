@@ -5,7 +5,7 @@ class RegisteredVotersController < ApplicationController
   # GET /registered_voters
   # GET /registered_voters.json
   def index
-    @registered_voters = RegisteredVoter.all.paginate(:page => params[:page], :per_page => 10)
+    @registered_voters = RegisteredVoter.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
     if params[:count]
       params[:count]
@@ -182,6 +182,6 @@ class RegisteredVotersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def registered_voter_params
-      params.require(:registered_voter).permit(:voter_id, :surname, :other_names, :level_id, :session_id, :program_id, :gender, :vote_status, :user_id, :active_status, :del_status)
+      params.require(:registered_voter).permit(:voter_id, :surname, :other_names, :level_id, :session_id, :program_id, :gender, :vote_status, :user_id, :active_status, :del_status, :image, :image_file_name, :image_content_type, :image_file_size, :image_updated_at)
     end
 end

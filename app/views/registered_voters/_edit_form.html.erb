@@ -21,7 +21,7 @@
 				    <%= f.input :surname %>
 				    <%= f.input :other_names %>
 				    <%= f.input :level_id, collection: LevelMaster.all, label_method: :level, value_method: :id %>
-				    <%= f.input :session_id, collection: SessionMaster.all, label_method: :session, value_method: :id %>
+				    <%= f.input :session_id, collection: SessionMaster.where(active_status: true), label_method: :session, value_method: :id %>
 				    <%= f.input :program_id, collection: ProgramMaster.all, label_method: :program_name, value_method: :id %>
 				    <%= f.input :gender, collection: ['Male', 'Female'] %>
 				    <% if @registered_voter.vote_status == true %>
@@ -32,6 +32,9 @@
 				    <%= f.input :user_id, as: :hidden %>
 				    <%= f.input :active_status, as: :hidden, input_html: {value: 1} %>
 				    <%= f.input :del_status, as: :hidden, input_html: {value: 0} %>
+				    
+				    <br />
+				    <%= f.input :image, as: :file, label: "Upload Image" %>
                </div>
            </div>
         <br>

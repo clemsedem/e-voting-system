@@ -1,0 +1,85 @@
+<div class="container w3-white" id = "page-container" >
+<% if flash[:notice] %>
+   <p class="flash_notice" id = 'notes' style = "margin-top: 5px"><%= notice %></p>
+<% end %>	
+
+ <h4>Election Results</h4>
+	
+			
+		<div class="w3-bar w3-black">
+		    <button class="w3-bar-item w3-button tablink w3-teal" onclick="openCity(event,'President')"><b>President</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Secretary')"><b>Secretary</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'Treasurer')"><b>Treasurer</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'F_Secretary')"><b>Financial Secretary</b></button>
+		    <button class="w3-bar-item w3-button tablink" onclick="openCity(event,'WOCOM')"><b>Women Commissioner</b></button>
+		 </div>
+		
+		<div id="President" class="w3-container w3-display-container city w3-border" style="margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none' "
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br />
+		    <%= render :partial=> 'president' %>
+		</div>
+		
+		<div id="Secretary" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  <%= render :partial=> 'secretary' %>
+		</div>
+		
+		<div id="Treasurer" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  	<%= render :partial=> 'treasurer' %>
+		</div>
+		
+		
+		<div id="F_Secretary" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  	<%= render :partial=> 'financial_secretary' %>
+		</div>
+		
+		<div id="WOCOM" class="w3-container w3-display-container city w3-border" style="display:none; margin-bottom: 5%">
+		  <!-- <span onclick="this.parentElement.style.display='none'"
+		  class="w3-button w3-large w3-display-topright">&times;</span> -->
+		  <br /><br />
+		  	<%= render :partial=> 'wocom' %>
+		</div>
+
+</div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+  setTimeout(function(){
+    $('#notes').remove();
+  }, 4000);
+ });
+ 
+</script>
+
+
+<script>
+function openCity(evt, cityName) {
+  var i, x, tablinks;
+  x = document.getElementsByClassName("city");
+  for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablink");
+  for (i = 0; i < x.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" w3-teal", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " w3-teal";
+}
+</script>
+
+
+
+
+

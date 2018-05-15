@@ -36,6 +36,15 @@
 			    	</div>
 			    </body>
 			    
+		  <% elsif current_user.role.name = 'Polling Agent'%>
+		  		<body id="verify-page">
+		  			<header>
+				      <%= render 'layouts/navigation' %>
+				    </header>
+		  			<%= yield %>
+				    
+			    </body>
+			    
 	      <%end%> 
 	      
   <% elsif params[:action] == 'welcome' %>

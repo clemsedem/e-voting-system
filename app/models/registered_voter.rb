@@ -1,6 +1,10 @@
 class RegisteredVoter < ActiveRecord::Base
   self.primary_key = 'voter_id'
   
+   has_attached_file :image, styles: { large: "600x600>", medium: "300x300>", thumb: "120x120#" }
+   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/ 
+   validates_attachment :image, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  
   validates :voter_id, presence: {message: "Please enter a voter id"}
   validates :surname, presence: {message: "Please enter a surname"}
   validates :other_names, presence: {message: "Please enter a other name"}

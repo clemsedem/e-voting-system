@@ -63,7 +63,6 @@
 	    <tr class="w3-pale-blue">
 	      <th>S/N</th>
 	      <th>Session</th>
-	      <th>Added By</th>
 	      <th>Status</th>
 	      <th colspan="2">Options</th>
 	    </tr> 
@@ -74,7 +73,6 @@
 	      <tr>
 	      	<td style="width: 5px"><%= index+1 %></td>
 	        <td><%= session_master.session %></td>
-	        <td><%= session_master.user_id %></td>
 	        <% if session_master.active_status == true %>  
 	            <td style="color: ">Active</td>	      		 
 	        <%elsif session_master.active_status == false %>

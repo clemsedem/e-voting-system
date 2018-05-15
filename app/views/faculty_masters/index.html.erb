@@ -61,7 +61,6 @@
 		    <tr class="w3-pale-blue" >
 		      <th>S/N</th>
 		      <th>Faculty Name</th>
-		      <th>Added By</th>
 		      <th>Status</th>  
 		      <th colspan="2">Options</th>
 		    </tr>
@@ -72,7 +71,7 @@
 		      <tr class="">
 		      	<td><%= index+1 %></td>
 		        <td><%= faculty_master.faculty_name %></td>
-		        <td><%= faculty_master.user_id %></td>		        
+		        	        
 		        <% if faculty_master.active_status == true %>  
 	               <td style="color: ">Active</td>	      		 
 	            <%elsif faculty_master.active_status == false %>

@@ -29,6 +29,8 @@ class ApplicationController < ActionController::Base
         admin_home_path
       elsif resource.role.name == 'Verification Officer'
         verification_page_path
+      elsif resource.role.name == 'Polling Agent'
+        polling_agent_path
       end
    end
    

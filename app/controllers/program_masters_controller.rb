@@ -5,7 +5,7 @@ class ProgramMastersController < ApplicationController
   # GET /program_masters
   # GET /program_masters.json
   def index
-    @program_masters = ProgramMaster.all.paginate(:page => params[:page], :per_page => 10)
+    @program_masters = ProgramMaster.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
     if params[:count]
       params[:count]

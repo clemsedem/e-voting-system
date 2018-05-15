@@ -5,7 +5,7 @@ class SessionMastersController < ApplicationController
   # GET /session_masters
   # GET /session_masters.json
   def index
-    @session_masters = SessionMaster.all.paginate(:page => params[:page], :per_page => 10)
+    @session_masters = SessionMaster.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
     if params[:count]
       params[:count]

@@ -5,7 +5,7 @@ class FacultyMastersController < ApplicationController
   # GET /faculty_masters
   # GET /faculty_masters.json
   def index
-    @faculty_masters = FacultyMaster.all.paginate(:page => params[:page], :per_page => 10)
+    @faculty_masters = FacultyMaster.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
     if params[:count]
       params[:count]

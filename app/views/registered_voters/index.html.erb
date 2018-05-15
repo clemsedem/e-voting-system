@@ -62,6 +62,7 @@
 	  <thead>
 	    <tr class="w3-pale-blue">
 	      <th>S/N</th>
+	      <th>Image</th>
 	      <th>Voter ID</th>
 	      <th>Full Name</th>
 	      <th>Level</th>
@@ -78,6 +79,13 @@
 	    <% @registered_voters.each_with_index do |registered_voter, index| %>
 	      <tr>
 	      	<td><%= index+1 %></td>
+	      	<td>
+	      		<% if registered_voter.image.present?%>
+	      		  <%= image_tag registered_voter.image.url(:thumb), class: "img-thumbnail ", style: "width: 100px;  margin: 2px" %>	      		  
+	      		<%else%>
+	      		  <%= image_tag ('user.png'), class: "img-thumbnail", style: "width: 100px;  margin: 2px" %> 
+	      		<%end%>
+	      	</td>
 	        <td><%= registered_voter.voter_id %></td>
 	        <td><%= registered_voter.surname %> <%= registered_voter.other_names %></td>
 	        <td><%= registered_voter.level_master.level %></td>

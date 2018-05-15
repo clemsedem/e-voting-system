@@ -5,7 +5,7 @@ class PortfolioMastersController < ApplicationController
   # GET /portfolio_masters
   # GET /portfolio_masters.json
   def index
-    @portfolio_masters = PortfolioMaster.all.paginate(:page => params[:page], :per_page => 10)
+    @portfolio_masters = PortfolioMaster.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
      if params[:count]
       params[:count]

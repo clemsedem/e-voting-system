@@ -5,11 +5,11 @@ class CandidateMastersController < ApplicationController
   # GET /candidate_masters
   # GET /candidate_masters.json
   def index
-    @candidate_prez = CandidateMaster.where(portfolio_id: "P").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
-    @candidate_sec = CandidateMaster.where(portfolio_id: "S").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
-    @candidate_tr = CandidateMaster.where(portfolio_id: "TR").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
-    @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
-    @candidate_wocom = CandidateMaster.where(portfolio_id: "WC").paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    @candidate_prez = CandidateMaster.where(portfolio_id: "P", active_status: true).paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    @candidate_sec = CandidateMaster.where(portfolio_id: "S", active_status: true).paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    @candidate_tr = CandidateMaster.where(portfolio_id: "TR", active_status: true).paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    @candidate_f_sec = CandidateMaster.where(portfolio_id: "FS", active_status: true).paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
+    @candidate_wocom = CandidateMaster.where(portfolio_id: "WC", active_status: true).paginate(:page => params[:page], :per_page => 3).order('slot_id asc')
      
    
     # if params[:count]

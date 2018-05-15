@@ -1,7 +1,7 @@
 class VotePageController < ApplicationController
   
    def president       
-      @presidential_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =?", 'President').paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
+      @presidential_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =? AND candidate_masters.active_status =?", 'President', true).paginate(:page => params[:page], :per_page => 4).order('candidate_masters.slot_id asc')
       logger.info @presidential_candidates.inspect
       @voter_token = params[:%]
       voter_in_token = VoterToken.where(token: @voter_token)[0]
@@ -22,7 +22,7 @@ class VotePageController < ApplicationController
    
    
    def secretary      
-      @secretary_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =?", 'Secretary').paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
+      @secretary_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =? AND candidate_masters.active_status =?", 'Secretary', true).paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
       logger.info @secretary_candidates.inspect
       @voter_token = params[:%]
       logger.info @voter_token.inspect
@@ -44,7 +44,7 @@ class VotePageController < ApplicationController
    
    
    def treasurer
-     @treasurer_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =?", 'Treasurer').paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
+     @treasurer_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.portfolio =? AND candidate_masters.active_status =?", 'Treasurer', true).paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
       logger.info @treasurer_candidates.inspect
        @voter_token = params[:%]
       logger.info @voter_token.inspect
@@ -66,7 +66,7 @@ class VotePageController < ApplicationController
    
    
    def finacial_secretary
-      @finance_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.ref_id =?", 'FS').paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
+      @finance_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.ref_id =? AND candidate_masters.active_status =?", 'FS', true).paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
       logger.info @finance_candidates.inspect
        @voter_token = params[:%]
       logger.info @voter_token.inspect
@@ -88,7 +88,7 @@ class VotePageController < ApplicationController
    
    
    def wocom
-      @wocom_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.ref_id =?", 'WC').paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
+      @wocom_candidates = CandidateMaster.joins(:portfolio_master).where("portfolio_masters.ref_id =? AND candidate_masters.active_status =?", 'WC', true).paginate(:page => params[:page], :per_page => 5).order('candidate_masters.slot_id asc')
       logger.info @wocom_candidates.inspect
       @voter_token = params[:%]
       logger.info @voter_token.inspect
@@ -203,8 +203,9 @@ class VotePageController < ApplicationController
                       format.html { redirect_to finacial_secretary_page_path(:% => @voter_token) }
                    end
                    
-               elsif @portfolio_id == 'FS' or @portfolio_id == 'FS_NONE'
+               elsif @portfolio_id == 'FS' or @portfolio_id == 'FS_NONE' 
                     respond_to do |format|
+                      # if check_voter[0].
                       format.html { redirect_to wocom_page_path(:% => @voter_token) }
                    end
                 

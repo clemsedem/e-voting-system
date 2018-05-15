@@ -63,7 +63,6 @@
 	    <tr class="w3-pale-blue">
 	      <th>S/N</th>
 	      <th>Portfolio</th>
-	      <th>Added By</th>
 	      <th>Status</th>
 	      <th colspan="2">Options</th>
 	    </tr> 
@@ -74,7 +73,6 @@
 	      <tr>
 	      	<td style="width: 5px"><%= index+1 %></td>
 	        <td><%= portfolio_master.portfolio %></td>
-	        <td><%= portfolio_master.user_id %></td>
 	        <% if portfolio_master.active_status == true %>  
 	            <td style="color: ">Active</td>	      		 
 	        <%elsif portfolio_master.active_status == false %>

@@ -3,6 +3,8 @@ Rails.application.routes.draw do
 
   
 
+  
+
   # get 'welcome/index'
 
   resources :add_voter_reasons
@@ -34,6 +36,9 @@ Rails.application.routes.draw do
  
  # verification page
   get '/verification_page/index' => 'verification_page#index', :as => 'verification_page'
+  
+  # polling agents page
+  get '/polling_agent_page/index' => 'polling_agent_page#index', :as => 'polling_agent'
   
   # verify voter
   get 'verify_voter'   =>  'verification_page#verify_voter'

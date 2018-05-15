@@ -5,7 +5,7 @@ class LevelMastersController < ApplicationController
   # GET /level_masters
   # GET /level_masters.json
   def index
-    @level_masters = LevelMaster.all.paginate(:page => params[:page], :per_page => 10)
+    @level_masters = LevelMaster.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
      if params[:count]
       params[:count]

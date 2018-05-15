@@ -64,7 +64,6 @@
 	      <th>S/N</th>
 	      <th>Program Name</th>
 	      <th>Department</th>
-	      <th>Added By</th>
 	      <th>Status</th>
 	      <th colspan="2">Options</th>
 	    </tr> 
@@ -76,7 +75,6 @@
 	      	<td><%= index+1 %></td>
 	        <td><%= program_master.program_name %></td>
 	        <td><%= program_master.department_master.department_name %></td>
-	        <td><%= program_master.user_id %></td>
 	        <% if program_master.active_status == true %>  
 	            <td style="color: ">Active</td>	      		 
 	        <%elsif program_master.active_status == false %>

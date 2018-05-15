@@ -5,7 +5,7 @@ class RolesController < ApplicationController
   # GET /roles
   # GET /roles.json
   def index
-    @roles = Role.all.paginate(:page => params[:page], :per_page => 10)
+    @roles = Role.where(active_status: true).paginate(:page => params[:page], :per_page => 10)
     
     
     if params[:count]

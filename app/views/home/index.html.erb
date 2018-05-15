@@ -1,11 +1,18 @@
 
-<% if current_user.role.name !=  'Super Admin' %>
-     <script type="text/javascript">
-        window.location.href="/verification_page/index"  // put your correct path in a string here
-     </script>
-     
+<% if current_user.role.name !=  'Verification Officer' %>
+     <% if current_user.role.name ==  'Super Admin'%>
+     	<script type="text/javascript">
+           window.location.href="/verification_page/index"  // put your correct path in a string here
+       </script>
+     <% elsif current_user.role.name ==  'Polling Agent' %>
+	     <script type="text/javascript">
+	        window.location.href="/polling_agent_page/index"  // put your correct path in a string here
+	     </script>
+     <%end%>   
     <p class="alert alert-danger"> <%= flash[:danger] = "Sorry, you are not permitted to access the requested page!"%></p>
 <%end%>
+
+
 <div class="container" id = "page-container" >
 	  <% if flash[:notice] %>
 		 <p class="flash_notice " id = 'notes' style = "margin-top: 5px"><%= notice %></p>
